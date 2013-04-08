@@ -203,7 +203,7 @@ public class OceanImpl implements Ocean, TestOcean {
     public String printFinalScores() {
         StringBuilder strbld = new StringBuilder();
         strbld.append("GAME OVER!! You scored ").append(this.getHitCount()).append(".");
-        strbld.append("You sank ").append(this.getShipsSunk()).append(" ships");
+        strbld.append(" You sank ").append(this.getShipsSunk()).append(" ships");
         strbld.append(" and used ").append(this.getShotsFired()).append(" shots" + ".");
         return strbld.toString();
     }

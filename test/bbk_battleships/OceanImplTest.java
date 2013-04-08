@@ -4,6 +4,7 @@
  */
 package bbk_battleships;
 
+import java.util.regex.Pattern;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -31,15 +32,6 @@ public class OceanImplTest {
         OceanImpl instance = new OceanImpl();
         boolean expResult = true;
         boolean result = instance.placeAllShipsRandomly();
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        OceanImpl instance = new OceanImpl();
-        String expResult = "";
-        String result = instance.toString();
         assertEquals(expResult, result);
     }
 
@@ -253,11 +245,11 @@ public class OceanImplTest {
     public void testPrintFinalScores() {
         System.out.println("printFinalScores");
         OceanImpl instance = new OceanImpl();
-        String expResult = "";
-        String result = instance.printFinalScores();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "GAME OVER!! You scored 0. You sank 0 ships "+
+                "and used 0 shots.";
+        boolean result = Pattern.matches(expResult,
+                instance.printFinalScores());
+        assertTrue(result);
     }
 
     @Test
