@@ -71,6 +71,7 @@ public class OceanImpl implements Ocean, TestOcean {
     public boolean placeAllShipsRandomly() {
         // TODO
         // this does not have a "random" fleet - you should have one
+  
         Ship[] fleet = new Ship[UPPER];
         fleet[0] = new BattleShipImpl();
         fleet[1] = new CruiserImpl();
@@ -216,12 +217,95 @@ public class OceanImpl implements Ocean, TestOcean {
      */
     @Override
     public boolean checkThatPlacementOfShipsFollowsRules(){
-        
-        // iterate through the cells of the board.
-        // identify an vessel within a cell.
-        // check all neighbouring cells.
-        // if the a neighbouring cell contains anything other than
-        // empty sea of the same said vessel. return false.
+        int i = board.length;
+        while(--i != -1){
+            int j = board[i].length;
+            while(--j != -1){
+                if(this.isOccupied(i, j)){
+                    int bowRow = board[i][j].getBowRow();
+                    int bowColumn = board[i][j].getBowColumn();
+                    boolean horizontal = board[i][j].isHorizontal();
+                    if("submarine".equals(board[i][j].getShipType())){
+                        if( outOfTheOceanPerimeter(bowRow+1,bowColumn) | isOccupied(bowRow+1, bowColumn) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow+1,bowColumn-1) | isOccupied(bowRow+1, bowColumn-1) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow+1,bowColumn+1) | isOccupied(bowRow+1, bowColumn+1) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow-1,bowColumn) | isOccupied(bowRow-1, bowColumn) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow-1,bowColumn-1) | isOccupied(bowRow-1, bowColumn-1) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow-1,bowColumn+1) | isOccupied(bowRow-1, bowColumn+1) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow,bowColumn-1) | isOccupied(bowRow, bowColumn-1) ){return false;}
+                        if( outOfTheOceanPerimeter(bowRow,bowColumn+1) | isOccupied(bowRow, bowColumn+1) ){return false;}
+                    }else if("destroyer".equals(board[i][j].getShipType())){
+                        if(!horizontal){
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn) | isOccupied(bowRow+2, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn-1) | isOccupied(bowRow+2, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn+1) | isOccupied(bowRow+2, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn) | isOccupied(bowRow-1, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn-1) | isOccupied(bowRow-1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn+1) | isOccupied(bowRow-1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn-1) | isOccupied(bowRow, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn+1) | isOccupied(bowRow, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn-1) | isOccupied(bowRow+1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn+1) | isOccupied(bowRow+1, bowColumn+1) ){return false;}
+                        }else{
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn-1) | isOccupied(bowRow-1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn-1) | isOccupied(bowRow, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn-1) | isOccupied(bowRow+1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn) | isOccupied(bowRow-1, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn) | isOccupied(bowRow+1, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn+1) | isOccupied(bowRow-1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn+1) | isOccupied(bowRow+1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn-2) | isOccupied(bowRow-1, bowColumn+2) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn+2) | isOccupied(bowRow+1, bowColumn+2) ){return false;}
+                        }
+                    }else if("cruiser".equals(board[i][j].getShipType())){
+                        if(!horizontal){
+                            if( outOfTheOceanPerimeter(bowRow+3,bowColumn) | isOccupied(bowRow+3, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+3,bowColumn-1) | isOccupied(bowRow+3, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+3,bowColumn+1) | isOccupied(bowRow+3, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn) | isOccupied(bowRow-1, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn-1) | isOccupied(bowRow-1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn+1) | isOccupied(bowRow-1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn-1) | isOccupied(bowRow, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn+1) | isOccupied(bowRow, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn-1) | isOccupied(bowRow+1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn+1) | isOccupied(bowRow+1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn-1) | isOccupied(bowRow+2, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn+1) | isOccupied(bowRow+2, bowColumn+1) ){return false;}                        
+                        }else{
+                            return true;
+                        }
+                    }else if("battleship".equals(board[i][j].getShipType())){
+                        if(!horizontal){
+                            if( outOfTheOceanPerimeter(bowRow+4,bowColumn) | isOccupied(bowRow+4, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+4,bowColumn-1) | isOccupied(bowRow+4, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+4,bowColumn+1) | isOccupied(bowRow+4, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn) | isOccupied(bowRow-1, bowColumn) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn-1) | isOccupied(bowRow-1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow-1,bowColumn+1) | isOccupied(bowRow-1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn-1) | isOccupied(bowRow, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow,bowColumn+1) | isOccupied(bowRow, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn-1) | isOccupied(bowRow+1, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+1,bowColumn+1) | isOccupied(bowRow+1, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn-1) | isOccupied(bowRow+2, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+2,bowColumn+1) | isOccupied(bowRow+2, bowColumn+1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+3,bowColumn-1) | isOccupied(bowRow+3, bowColumn-1) ){return false;}
+                            if( outOfTheOceanPerimeter(bowRow+3,bowColumn+1) | isOccupied(bowRow+3, bowColumn+1) ){return false;}
+                        }else{
+                            return true;
+                        }
+                    }else{
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
+    }
+    
+    /**
+     * Check the perimeter of the ocean.
+     */
+    private boolean outOfTheOceanPerimeter(int x, int y){
+        return x >= board.length | y >= board.length;
     }
 }
