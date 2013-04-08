@@ -4,7 +4,7 @@ public interface Ocean {
     
     int getDimension();
 
-    void placeAllShipsRandomly();
+    boolean placeAllShipsRandomly();
 
     @Override
     String toString();

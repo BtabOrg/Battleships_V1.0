@@ -15,7 +15,7 @@ import lombok.Setter;
 
 import java.util.Random;
 
-public class OceanImpl implements Ocean {
+public class OceanImpl implements Ocean, TestOcean {
 
     private static final int UPPER;  // upper bound of the (square) board
 
@@ -68,7 +68,7 @@ public class OceanImpl implements Ocean {
      * Places all 10 board randomly on the (initially empty) ocean.
      */
     @Override
-    public void placeAllShipsRandomly() {
+    public boolean placeAllShipsRandomly() {
         // TODO
         // this does not have a "random" fleet - you should have one
         Ship[] fleet = new Ship[UPPER];
@@ -99,6 +99,7 @@ public class OceanImpl implements Ocean {
             // it is safe to place the ship
             s.placeShipAt(x, y, b, this);
         }
+        return this.checkThatPlacementOfShipsFollowsRules();
     }
 
     /**
@@ -205,5 +206,22 @@ public class OceanImpl implements Ocean {
         strbld.append("You sank ").append(this.getShipsSunk()).append(" ships");
         strbld.append(" and used ").append(this.getShotsFired()).append(" shots" + ".");
         return strbld.toString();
+    }
+    
+    /**
+     * Check that the placement of the ships was performed
+     * according to the rules of laying out a vessel with no neighbouring 
+     * cell being occupied by another vessel.
+     * TODO remove this interface test method.......
+     */
+    @Override
+    public boolean checkThatPlacementOfShipsFollowsRules(){
+        
+        // iterate through the cells of the board.
+        // identify an vessel within a cell.
+        // check all neighbouring cells.
+        // if the a neighbouring cell contains anything other than
+        // empty sea of the same said vessel. return false.
+        return false;
     }
 }

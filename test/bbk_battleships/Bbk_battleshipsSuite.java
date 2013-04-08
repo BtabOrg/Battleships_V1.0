@@ -13,7 +13,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    bbk_battleships.SubmarineImplTest.class,
+    bbk_battleships.OceanImplTest.class,
 })
 public class Bbk_battleshipsSuite {
     
