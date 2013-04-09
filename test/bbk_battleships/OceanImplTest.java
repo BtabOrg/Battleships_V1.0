@@ -32,6 +32,7 @@ public class OceanImplTest {
         OceanImpl instance = new OceanImpl();
         boolean expResult = true;
         boolean result = instance.placeAllShipsRandomly();
+        System.out.println(instance.toString());
         assertEquals(expResult, result);
     }
 

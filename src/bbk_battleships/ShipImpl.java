@@ -12,41 +12,34 @@ import lombok.Setter;
  * @author MARGARET WRIGHT
  * @author KLM
  */
-
 public abstract class ShipImpl implements Ship {
+
     /**
-     * the number of squares occupied by the ship. An "empty sea" location has length 1.
+     * the number of squares occupied by the ship. An "empty sea" location has
+     * length 1.
      */
     @Getter
     @Setter(AccessLevel.PROTECTED)
     private int length;
-
     /**
      * the row (0 to 9) which contains the bow (front) of the ship.
      */
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int bowRow;
-
     /**
      * the column (0 to 9) which contains the bow (front) of the ship.
      */
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int bowColumn;
-
-
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private boolean horizontal;
-
     /**
-     * An array of boolean which indicates whether that part of the ship has been hit.
-     * Only battleships use all four locations;
-     * cruisers use the first three;
-     * destroyers 2;
-     * submarines 1; and
-     * "empty sea" either one or none..
+     * An array of boolean which indicates whether that part of the ship has
+     * been hit. Only battleships use all four locations; cruisers use the first
+     * three; destroyers 2; submarines 1; and "empty sea" either one or none..
      */
     protected boolean[] hit;
 
@@ -67,40 +60,92 @@ public abstract class ShipImpl implements Ship {
      * another ship (vertically, horizontally, or diagonally) and that ship will
      * not "stick out" beyond the array.
      *
-     * @param row        that will contain the bow
-     * @param column     that will contain the bow
+     * @param row that will contain the bow
+     * @param column that will contain the bow
      * @param horizontal
      * @param ocean
      * @return true if it is okay to put a ship of this size with its bow in
-     *         this location, with the given orientation.
+     * this location, with the given orientation.
      */
     @Override
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
-                                   Ocean ocean) {
+            Ocean ocean) {
         // check that the length + row | column position does not exceed bounds.
-        if((row + getLength() > ocean.getDimension()) | 
-                (column + getLength() > ocean.getDimension())
-                ){
+        if ((row + getLength() > ocean.getDimension())
+                | (column + getLength() > ocean.getDimension())) {
             return false;
         }
-        // TODO add appropriate code and comments
+        int i = getLength();
+        while (--i > -1) {
+            if (horizontal) {
+                if (ocean.isOccupied(row, column+i)) {
+                    return false;
+                }
+            } else {
+                if (ocean.isOccupied(row+i, column)) {
+                    return false;
+                }
+            }
+        }
+
+        if (horizontal) {
+            try {
+                if (ocean.isOccupied(row - 1, column - 1)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row - 1, column)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row - 1, column + 1)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row, column - 1)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row, column + 1)) {
+                    return false;
+                }
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                return false;
+            }
+        } else {
+            try {
+                if (ocean.isOccupied(row, column - 1)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row - 1, column - 1)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row - 1, column)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row + 1, column - 1)) {
+                    return false;
+                }
+                if (ocean.isOccupied(row, column + 1)) {
+                    return false;
+                }
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                return false;
+            }
+        }
+
         return true;
     }
 
-
     /**
-     * "places" the ship in the ocean, assigning values to the bowRow, bowColumn, and
-     * horizontal.
-     * Places a reference to the ship in the ships array in the Ocean object.
+     * "places" the ship in the ocean, assigning values to the bowRow,
+     * bowColumn, and horizontal. Places a reference to the ship in the ships
+     * array in the Ocean object.
      *
-     * @param row        to contain the bow
-     * @param column     to contain the bow
+     * @param row to contain the bow
+     * @param column to contain the bow
      * @param horizontal
      * @param ocean
      */
     @Override
-    public void placeShipAt(int row, int column, boolean horizontal, 
-    Ocean ocean) {
+    public void placeShipAt(int row, int column, boolean horizontal,
+            Ocean ocean) {
 
         this.setBowRow(row);
         this.setBowColumn(column);
@@ -122,7 +167,7 @@ public abstract class ShipImpl implements Ship {
     /**
      * If this ship has been hit, marks that part of the ship as "hit"
      *
-     * @param row    User's supplied row shot
+     * @param row User's supplied row shot
      * @param column User's supplied column shot
      * @return true if ship is hit, false otherwise
      */
@@ -136,7 +181,7 @@ public abstract class ShipImpl implements Ship {
         try {
             hit[(row - getBowRow() + column - getBowColumn())] = true;
             return true;
-        }catch(ArrayIndexOutOfBoundsException exception){
+        } catch (ArrayIndexOutOfBoundsException exception) {
             return false;
         }
     }
@@ -149,9 +194,11 @@ public abstract class ShipImpl implements Ship {
     @Override
     public boolean isSunk() {
 
-        for (boolean b : hit)
-            if (!b)
+        for (boolean b : hit) {
+            if (!b) {
                 return false;
+            }
+        }
 
         return true;
     }
