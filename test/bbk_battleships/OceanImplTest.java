@@ -145,6 +145,7 @@ public class OceanImplTest {
     @Test
     public void testShootAtAndMissTarget() {
         System.out.println("shootAtAndMissTarget");
+
         int deploymentRow = 0;
         int deploymentColumn = 0;
         OceanImpl ocean = new OceanImpl();
@@ -182,9 +183,12 @@ public class OceanImplTest {
     @Test
     public void testShootAtAndHitTarget() {
         System.out.println("shootAtAndHitTarget");
+        
         int deploymentRow = 0;
         int deploymentColumn = 0;
+        
         OceanImpl ocean = new OceanImpl();
+        
         boolean unoccupiedResult = false;
         boolean isItOccupied = ocean.isOccupied(deploymentRow,
                 deploymentColumn);
@@ -192,8 +196,8 @@ public class OceanImplTest {
         
         Submarine submarine = new SubmarineImpl();
         boolean vesselIsHorizontal = true;
-        boolean deployed = submarine.okToPlaceShipAt(deploymentRow,
-                deploymentColumn, vesselIsHorizontal, ocean);
+        boolean deployed = submarine.okToPlaceShipAt(0,
+                0, true, ocean);
         assertTrue(deployed);
         
         submarine.placeShipAt(deploymentRow,
@@ -206,9 +210,9 @@ public class OceanImplTest {
         assertEquals(expResult, result);
         
         int shotsThatHaveBeenFired = 1;
-        int actuallyShotsThatHaveBeenFired = 1;
+        int actualShotsThatHaveBeenFired = 1;
         assertEquals(shotsThatHaveBeenFired,
-                actuallyShotsThatHaveBeenFired);
+                actualShotsThatHaveBeenFired);
         
         int recordedHit = 1;
         int actualHit = ocean.getHitCount();

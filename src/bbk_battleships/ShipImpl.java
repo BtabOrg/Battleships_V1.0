@@ -4,6 +4,7 @@
  */
 package bbk_battleships;
 
+import java.util.ArrayList;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,67 +71,46 @@ public abstract class ShipImpl implements Ship {
     @Override
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
             Ocean ocean) {
-        // check that the length + row | column position does not exceed bounds.
-        if ((row + getLength() > ocean.getDimension())
-                | (column + getLength() > ocean.getDimension())) {
+        if(row+getLength() >= ocean.getDimension() ||
+                column+getLength() >= ocean.getDimension()) {
             return false;
         }
-        int i = getLength();
-        while (--i > -1) {
-            if (horizontal) {
-                if (ocean.isOccupied(row, column+i)) {
-                    return false;
-                }
-            } else {
-                if (ocean.isOccupied(row+i, column)) {
-                    return false;
-                }
-            }
+        /*
+        ArrayList<Integer> rowArray = new ArrayList(8);
+        ArrayList<Integer> columnArray = new ArrayList(8);
+        
+        rowArray.add(row-1);
+        rowArray.add(row-1);
+        rowArray.add(row-1);
+        rowArray.add(row);
+        rowArray.add(row);
+        rowArray.add(row);
+        rowArray.add(row+1);
+        rowArray.add(row+1);
+        rowArray.add(row+1);
+        
+        columnArray.add(column-1);
+        columnArray.add(column);
+        columnArray.add(column+1);
+        columnArray.add(column-1);
+        columnArray.add(column);
+        columnArray.add(column+1);
+        columnArray.add(column-1);
+        columnArray.add(column);
+        columnArray.add(column+1);
+        */
+        boolean occupied = false;
+            /*
+        int lengthOfCoordinatesArrays = 8;
+        for(int i = 0; i < lengthOfCoordinatesArrays; i++){
+            try{
+                occupied = ocean.isOccupied(rowArray.get(i),
+                        columnArray.get(i));
+            }catch(ArrayIndexOutOfBoundsException exception){}
+            if(occupied) break;
         }
-
-        if (horizontal) {
-            try {
-                if (ocean.isOccupied(row - 1, column - 1)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row - 1, column)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row - 1, column + 1)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row, column - 1)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row, column + 1)) {
-                    return false;
-                }
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                return false;
-            }
-        } else {
-            try {
-                if (ocean.isOccupied(row, column - 1)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row - 1, column - 1)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row - 1, column)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row + 1, column - 1)) {
-                    return false;
-                }
-                if (ocean.isOccupied(row, column + 1)) {
-                    return false;
-                }
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                return false;
-            }
-        }
-
-        return true;
+            */ 
+        return occupied;
     }
 
     /**
