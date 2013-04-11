@@ -71,46 +71,86 @@ public abstract class ShipImpl implements Ship {
     @Override
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
             Ocean ocean) {
+        boolean itsOk = true;
         if(row+getLength() >= ocean.getDimension() ||
                 column+getLength() >= ocean.getDimension()) {
-            return false;
-        }
-        /*
-        ArrayList<Integer> rowArray = new ArrayList(8);
-        ArrayList<Integer> columnArray = new ArrayList(8);
-        
-        rowArray.add(row-1);
-        rowArray.add(row-1);
-        rowArray.add(row-1);
-        rowArray.add(row);
-        rowArray.add(row);
-        rowArray.add(row);
-        rowArray.add(row+1);
-        rowArray.add(row+1);
-        rowArray.add(row+1);
-        
-        columnArray.add(column-1);
-        columnArray.add(column);
-        columnArray.add(column+1);
-        columnArray.add(column-1);
-        columnArray.add(column);
-        columnArray.add(column+1);
-        columnArray.add(column-1);
-        columnArray.add(column);
-        columnArray.add(column+1);
-        */
-        boolean occupied = false;
-            /*
-        int lengthOfCoordinatesArrays = 8;
-        for(int i = 0; i < lengthOfCoordinatesArrays; i++){
-            try{
+            itsOk = false;
+        }else{
+            ArrayList<Integer> rowArray = new ArrayList(8);
+            ArrayList<Integer> columnArray = new ArrayList(8);
+            ArrayList<Integer> itemsToBeRemovedArray = new ArrayList(8);
+
+            if(horizontal){
+                rowArray.add(row-1);
+                rowArray.add(row-1);
+                rowArray.add(row-1);
+                columnArray.add(column-1);
+                columnArray.add(column);
+                columnArray.add(column+1);
+                for(int i=0; i<getLength();i++)
+                {
+                    rowArray.add(row+i);
+                    rowArray.add(row+i);
+                    rowArray.add(row+i);
+                    columnArray.add(column-1);
+                    columnArray.add(column);
+                    columnArray.add(column+1);
+                }
+            }else{
+                rowArray.add(row-1);
+                rowArray.add(row);
+                rowArray.add(row+1);
+                columnArray.add(column-1);
+                columnArray.add(column-1);
+                columnArray.add(column-1);
+                for(int i=0; i<getLength();i++)
+                {
+                    rowArray.add(row-1);
+                    rowArray.add(row);
+                    rowArray.add(row+1);
+                    columnArray.add(column+i);
+                    columnArray.add(column+i);
+                    columnArray.add(column+1);
+                }
+            }
+            
+            int newLength = rowArray.size();
+            
+            for(int i = 0; i < newLength; i++){
+                if(rowArray.get(i) > ocean.getDimension() ||
+                        columnArray.get(i) > ocean.getDimension() ||
+                        rowArray.get(i) < 0 ||
+                        columnArray.get(i) < 0){
+                    System.out.println("removing "+rowArray.get(i)+" "+
+                            columnArray.get(i));
+                    itemsToBeRemovedArray.add(i);
+                }
+            }
+            System.out.println("row "+row);
+            System.out.println("column "+column);
+            System.out.println("remove indices "+
+                    itemsToBeRemovedArray.toString());
+            for(int i  = itemsToBeRemovedArray.size()-1; i >= 0 ; i--) {
+                int indice = itemsToBeRemovedArray.get(i);
+                rowArray.remove(indice);
+                columnArray.remove(indice);
+            }
+            
+            System.out.println("rows "+rowArray.toString());
+            System.out.println("columns "+columnArray.toString());
+            boolean occupied = false;
+            for(int i = 0; i < rowArray.size()-1; i++) {
                 occupied = ocean.isOccupied(rowArray.get(i),
                         columnArray.get(i));
-            }catch(ArrayIndexOutOfBoundsException exception){}
-            if(occupied) break;
+                System.out.println("occupied: "+occupied);
+                if(occupied==true){
+                    itsOk = false;
+                }
+            }
+            System.out.println("vessel can be placed: "+itsOk);
+            System.out.println("");
         }
-            */ 
-        return occupied;
+        return itsOk;
     }
 
     /**

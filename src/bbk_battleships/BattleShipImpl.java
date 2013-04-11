@@ -17,7 +17,6 @@ public class BattleShipImpl extends ShipImpl implements BattleShip {
         super(FOUR);
     }
     
-    
     /**
      * set the length of the vessel.
      */

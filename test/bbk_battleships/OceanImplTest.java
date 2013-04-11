@@ -26,7 +26,7 @@ public class OceanImplTest {
         assertEquals(expResult, result);
     }
 
-    @Test
+    @Test(timeout=10000)
     public void testPlaceAllShipsRandomly() {
         System.out.println("placeAllShipsRandomly");
         OceanImpl instance = new OceanImpl();

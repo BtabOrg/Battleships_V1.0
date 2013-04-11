@@ -85,6 +85,7 @@ public class OceanImpl implements Ocean {
         int x, y;
         // boolean to represent horizontal
         boolean b;
+        int vesselSuccessfullyDeployed = 0;
         for (Ship s : fleet) {
             do {
                 // generate random x, y, horizontal
@@ -92,11 +93,14 @@ public class OceanImpl implements Ocean {
                 y = m.nextInt(UPPER); // y/col is random 0-9
                 b = m.nextInt(2) == 1; // horizontal : 1 is true; 0 is false
             } while (!s.okToPlaceShipAt(x, y, b, this));
-
             // it is safe to place the ship
             s.placeShipAt(x, y, b, this);
+            System.out.println("ship was placed..");
+            System.out.println(toString());
+            System.out.println("");
+            vesselSuccessfullyDeployed++;
         }
-        return true;
+        return vesselSuccessfullyDeployed == UPPER ? true : false;
     }
 
     /**

@@ -18,7 +18,6 @@ public class CruiserImpl extends ShipImpl implements Cruiser {
         super(THREE);
     }
     
-    
     /**
      * set the length of the vessel.
      */
