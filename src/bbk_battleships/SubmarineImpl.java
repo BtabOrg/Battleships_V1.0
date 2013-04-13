@@ -12,9 +12,11 @@ package bbk_battleships;
 public class SubmarineImpl extends ShipImpl implements Submarine {
 
     private static final int ONE = 1; // number of squares occupied.
+    private static final String SUBMARINE = "S"; // the vessel identifier.
 
     public SubmarineImpl() {
         super(ONE);
+        setVesselIdentifier(SUBMARINE);
     }
     
     /**
@@ -41,6 +43,6 @@ public class SubmarineImpl extends ShipImpl implements Submarine {
      */
     @Override
     public String toString() {
-        return "S";
+        return getVesselIdentifier();
     }
 }

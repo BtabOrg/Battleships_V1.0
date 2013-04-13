@@ -13,9 +13,11 @@ package bbk_battleships;
 public class CruiserImpl extends ShipImpl implements Cruiser {
 
     private static final int THREE = 3; // The number of squares occupied.
+    private static final String CRUISER = "C"; // the crusier identifier.
     
     public CruiserImpl(){
         super(THREE);
+        setVesselIdentifier(CRUISER);
     }
     
     /**
@@ -42,7 +44,7 @@ public class CruiserImpl extends ShipImpl implements Cruiser {
      */
     @Override
     public String toString(){
-        return "C";
+        return getVesselIdentifier();
     }
     
 }

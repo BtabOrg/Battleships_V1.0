@@ -12,9 +12,11 @@ package bbk_battleships;
 public class BattleShipImpl extends ShipImpl implements BattleShip {
 
     private static final int FOUR = 4; // The number of squares occupied.
+    private static final String BATTLESHIP = "B"; // the battleship identifier.
     
     public BattleShipImpl() {
         super(FOUR);
+        setVesselIdentifier(BATTLESHIP);
     }
     
     /**
@@ -41,6 +43,6 @@ public class BattleShipImpl extends ShipImpl implements BattleShip {
      */
     @Override
     public String toString() {
-        return "B";
+        return getVesselIdentifier();
     }
 }

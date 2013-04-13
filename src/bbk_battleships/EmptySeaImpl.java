@@ -12,14 +12,15 @@ package bbk_battleships;
 public class EmptySeaImpl extends ShipImpl implements EmptySea {
 
     private final static int SIZE = 1; // number of squares occupied.
+    private static final String EMPTY_SEA = "."; // the empty sea identifier.
 
     /**
      * sets the length & clears the hit array
      */
     public EmptySeaImpl() {
-        super(SIZE);//, "EmptySea", ".");
+        super(SIZE);
+        setVesselIdentifier(EMPTY_SEA);
     }
-    
         
     /**
      * set the length of the vessel.
@@ -45,7 +46,7 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
      */
     @Override
     public String toString(){
-        return ".";
+        return getVesselIdentifier();
     }
     
     /**
@@ -57,6 +58,7 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
      */
     @Override
     public boolean shootAt(int row, int column) {
+        setVesselIdentifier(getVesselThatHasBeenMissedIdentifier());
         return false; // it's not a hit
     }
 }

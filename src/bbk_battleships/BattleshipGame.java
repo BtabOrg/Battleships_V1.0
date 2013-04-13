@@ -8,6 +8,7 @@
 
 package bbk_battleships;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class BattleshipGame {
         int limit;
         String reply;
         Scanner input = new Scanner(System.in);
-
+        
         do {
             // set up the game
             Ocean oc = new OceanImpl();
@@ -36,18 +37,22 @@ public class BattleshipGame {
             System.out.println();
             System.out.println(oc);
             limit = oc.getDimension();
-
+            
             do {
                 // read in the shot
-                Position p = getValidInput(input, limit);
+                Position p = getValidInput(input,limit);
+
                 // accept shots & check whether it's a hit (in Ocean)
                 if (!oc.shootAt(p.getX(), p.getY())) {
                     // a miss
                     System.out.println("A miss, try again.");
+                    
+                    
                 }
                 System.out.println(oc);
-                System.out.println("[. is empty sea; X is a miss; H is a hit; $ is a sunken ship.]");
+                System.out.println("[. is empty sea; '-' is a miss; 'S' is a hit; 'x' is a sunken ship.]");
                 System.out.println();
+                
             } while (!oc.isGameOver());
             // print out final scores
             System.out.println(oc.printFinalScores());

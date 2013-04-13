@@ -160,7 +160,12 @@ public class OceanImpl implements Ocean {
             board[row][column].shootAt(row, column);
             setHitCount(getHitCount() + 1);
             return true;
+        }else{
+            ShipImpl empySea = board[row][column];
+            empySea.setVesselIdentifier(
+                    empySea.getVesselThatHasBeenMissedIdentifier());
         }
+        
         return false;
     }
 

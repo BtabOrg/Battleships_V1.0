@@ -11,4 +11,7 @@ public interface Submarine extends Ship {
     
     @Override
     String getShipType();
+    
+    @Override
+    boolean shootAt(int row, int column);
 }

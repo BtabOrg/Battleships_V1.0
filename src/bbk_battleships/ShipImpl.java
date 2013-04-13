@@ -15,7 +15,35 @@ import lombok.Setter;
  */
 public abstract class ShipImpl implements Ship {
 
+    
+    // the number of cells that surround a given location
     private final int LOCATION_PERIMETER = 9;
+    
+    /**
+    * the identifier for a vessel.
+    */    
+    @Setter(AccessLevel.PROTECTED)
+    @Getter(AccessLevel.PROTECTED)
+    private String vesselIdentifier = "S";
+    
+    /**
+    * the identifier for a vessel that has been hit.
+    */
+    @Getter(AccessLevel.PROTECTED)
+    private String vesselThatHasBeenHitIdentifier = "S";
+    
+    /**
+    * the identifier for a vessel that has been missed.
+    */
+    @Getter(AccessLevel.PROTECTED)
+    private String vesselThatHasBeenMissedIdentifier = "-";
+
+    /**
+    * the identifier for a vessel that has been missed.
+    */
+    @Getter(AccessLevel.PROTECTED)
+    private String vesselThatHasBeenSunkIdentifier = "x";
+    
     /**
      * the number of squares occupied by the ship. An "empty sea" location has
      * length 1.
@@ -23,18 +51,21 @@ public abstract class ShipImpl implements Ship {
     @Getter
     @Setter(AccessLevel.PROTECTED)
     private int length;
+    
     /**
      * the row (0 to 9) which contains the bow (front) of the ship.
      */
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int bowRow;
+    
     /**
      * the column (0 to 9) which contains the bow (front) of the ship.
      */
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int bowColumn;
+    
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private boolean horizontal;
@@ -73,8 +104,8 @@ public abstract class ShipImpl implements Ship {
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
             Ocean ocean) {
         boolean itsOk = true;
-        if(row+getLength() >= ocean.getDimension() ||
-                column+getLength() >= ocean.getDimension()) {
+        if(row+getLength() > ocean.getDimension() ||
+                column+getLength() > ocean.getDimension()) {
             itsOk = false;
         }else{
             ArrayList<Integer> rowArray = 
@@ -121,8 +152,8 @@ public abstract class ShipImpl implements Ship {
             int newLength = rowArray.size();
             
             for(int i = 0; i < newLength; i++){
-                if(rowArray.get(i) > ocean.getDimension() ||
-                        columnArray.get(i) > ocean.getDimension() ||
+                if(rowArray.get(i) >= ocean.getDimension() ||
+                        columnArray.get(i) >= ocean.getDimension() ||
                         rowArray.get(i) < 0 ||
                         columnArray.get(i) < 0){
                     itemsToBeRemovedArray.add(i);
@@ -194,10 +225,12 @@ public abstract class ShipImpl implements Ship {
         // it's a hit. Work out offset & set that position in hit array to true
         try {
             hit[(row - getBowRow() + column - getBowColumn())] = true;
+            vesselIdentifier = vesselThatHasBeenHitIdentifier;
             return true;
         } catch (ArrayIndexOutOfBoundsException exception) {
             return false;
         }
+        
     }
 
     /**
@@ -224,4 +257,5 @@ public abstract class ShipImpl implements Ship {
     public String toString() {
         return this.getClass().getName();
     }
+    
 }
