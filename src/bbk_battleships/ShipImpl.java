@@ -15,6 +15,7 @@ import lombok.Setter;
  */
 public abstract class ShipImpl implements Ship {
 
+    private final int LOCATION_PERIMETER = 9;
     /**
      * the number of squares occupied by the ship. An "empty sea" location has
      * length 1.
@@ -76,40 +77,43 @@ public abstract class ShipImpl implements Ship {
                 column+getLength() >= ocean.getDimension()) {
             itsOk = false;
         }else{
-            ArrayList<Integer> rowArray = new ArrayList(8);
-            ArrayList<Integer> columnArray = new ArrayList(8);
-            ArrayList<Integer> itemsToBeRemovedArray = new ArrayList(8);
+            ArrayList<Integer> rowArray = 
+                    new ArrayList(LOCATION_PERIMETER);
+            ArrayList<Integer> columnArray = 
+                    new ArrayList(LOCATION_PERIMETER);
+            ArrayList<Integer> itemsToBeRemovedArray = 
+                    new ArrayList(LOCATION_PERIMETER);
 
             if(horizontal){
+                columnArray.add(column-1);
+                columnArray.add(column-1);
+                columnArray.add(column-1);
+                rowArray.add(row-1);
+                rowArray.add(row);
+                rowArray.add(row+1);
+                for(int i=0; i<=getLength(); i++)
+                {
+                    columnArray.add(column+i);
+                    columnArray.add(column+i);
+                    columnArray.add(column+i);
+                    rowArray.add(row-1);
+                    rowArray.add(row);
+                    rowArray.add(row+1);
+                }
+            }else{
                 rowArray.add(row-1);
                 rowArray.add(row-1);
                 rowArray.add(row-1);
                 columnArray.add(column-1);
                 columnArray.add(column);
                 columnArray.add(column+1);
-                for(int i=0; i<getLength();i++)
+                for(int i=0; i<=getLength(); i++)
                 {
                     rowArray.add(row+i);
                     rowArray.add(row+i);
                     rowArray.add(row+i);
                     columnArray.add(column-1);
                     columnArray.add(column);
-                    columnArray.add(column+1);
-                }
-            }else{
-                rowArray.add(row-1);
-                rowArray.add(row);
-                rowArray.add(row+1);
-                columnArray.add(column-1);
-                columnArray.add(column-1);
-                columnArray.add(column-1);
-                for(int i=0; i<getLength();i++)
-                {
-                    rowArray.add(row-1);
-                    rowArray.add(row);
-                    rowArray.add(row+1);
-                    columnArray.add(column+i);
-                    columnArray.add(column+i);
                     columnArray.add(column+1);
                 }
             }
@@ -121,34 +125,24 @@ public abstract class ShipImpl implements Ship {
                         columnArray.get(i) > ocean.getDimension() ||
                         rowArray.get(i) < 0 ||
                         columnArray.get(i) < 0){
-                    System.out.println("removing "+rowArray.get(i)+" "+
-                            columnArray.get(i));
                     itemsToBeRemovedArray.add(i);
                 }
             }
-            System.out.println("row "+row);
-            System.out.println("column "+column);
-            System.out.println("remove indices "+
-                    itemsToBeRemovedArray.toString());
-            for(int i  = itemsToBeRemovedArray.size()-1; i >= 0 ; i--) {
+            
+            for(int i = itemsToBeRemovedArray.size()-1; i >= 0; i--) {
                 int indice = itemsToBeRemovedArray.get(i);
                 rowArray.remove(indice);
                 columnArray.remove(indice);
             }
             
-            System.out.println("rows "+rowArray.toString());
-            System.out.println("columns "+columnArray.toString());
             boolean occupied = false;
-            for(int i = 0; i < rowArray.size()-1; i++) {
+            for(int i = 0; i < rowArray.size(); i++) {
                 occupied = ocean.isOccupied(rowArray.get(i),
                         columnArray.get(i));
-                System.out.println("occupied: "+occupied);
                 if(occupied==true){
                     itsOk = false;
                 }
             }
-            System.out.println("vessel can be placed: "+itsOk);
-            System.out.println("");
         }
         return itsOk;
     }

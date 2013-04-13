@@ -95,9 +95,6 @@ public class OceanImpl implements Ocean {
             } while (!s.okToPlaceShipAt(x, y, b, this));
             // it is safe to place the ship
             s.placeShipAt(x, y, b, this);
-            System.out.println("ship was placed..");
-            System.out.println(toString());
-            System.out.println("");
             vesselSuccessfullyDeployed++;
         }
         return vesselSuccessfullyDeployed == UPPER ? true : false;

@@ -25,7 +25,7 @@ public class OceanImplTest {
         int result = instance.getDimension();
         assertEquals(expResult, result);
     }
-
+    
     @Test(timeout=10000)
     public void testPlaceAllShipsRandomly() {
         System.out.println("placeAllShipsRandomly");
@@ -35,7 +35,7 @@ public class OceanImplTest {
         System.out.println(instance.toString());
         assertEquals(expResult, result);
     }
-
+    
     @Test
     public void testIsOccupied() {
         System.out.println("isOccupied");
@@ -285,4 +285,5 @@ public class OceanImplTest {
         int result = instance.getHitCount();
         assertEquals(expResult, result);
     }
+    
 }
