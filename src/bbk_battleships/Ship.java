@@ -22,4 +22,11 @@ public interface Ship {
     boolean isHorizontal();
 
     String getShipType();
+    
+    void setVesselIdentifier(String param);
+    
+    String getVesselThatHasBeenSunkIdentifier();
+    
+    String print(int row, int column);
+    
 }

@@ -12,9 +12,9 @@ import lombok.Setter;
 /**
  * @author MARGARET WRIGHT
  * @author KLM
+ * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public abstract class ShipImpl implements Ship {
-
     
     // the number of cells that surround a given location
     private final int LOCATION_PERIMETER = 9;
@@ -22,27 +22,27 @@ public abstract class ShipImpl implements Ship {
     /**
     * the identifier for a vessel.
     */    
-    @Setter(AccessLevel.PROTECTED)
-    @Getter(AccessLevel.PROTECTED)
+    @Setter
+    @Getter
     private String vesselIdentifier = "S";
     
     /**
     * the identifier for a vessel that has been hit.
     */
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private String vesselThatHasBeenHitIdentifier = "S";
     
     /**
     * the identifier for a vessel that has been missed.
     */
-    @Getter(AccessLevel.PROTECTED)
+    @Getter
     private String vesselThatHasBeenMissedIdentifier = "-";
 
     /**
     * the identifier for a vessel that has been missed.
     */
-    @Getter(AccessLevel.PROTECTED)
-    private String vesselThatHasBeenSunkIdentifier = "x";
+    @Getter
+    private String vesselThatHasBeenSunkIdentifier = "X";
     
     /**
      * the number of squares occupied by the ship. An "empty sea" location has
@@ -69,6 +69,7 @@ public abstract class ShipImpl implements Ship {
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private boolean horizontal;
+    
     /**
      * An array of boolean which indicates whether that part of the ship has
      * been hit. Only battleships use all four locations; cruisers use the first
@@ -77,12 +78,19 @@ public abstract class ShipImpl implements Ship {
     protected boolean[] hit;
 
     /**
+     * An array of strings which indicates the label to be used when that part 
+     * of the ship has been hit.
+     */
+    protected ArrayList<String> labels;
+
+    /**
      * clears the hit array indicating whether that part of the "Ship" has been
      * hit
      */
     protected ShipImpl(int length) {
         this.length = length;
         hit = new boolean[this.getLength()];
+        labels = new ArrayList<>(this.getLength());
         for (int i = 0; i < hit.length; i++) {
             hit[i] = false;
         }
@@ -197,10 +205,11 @@ public abstract class ShipImpl implements Ship {
         this.setHorizontal(horizontal);
 
         Ship ships[][] = ocean.getShipArray();
-
+        
         for (int i = 0; i < this.getLength(); i++) {
             // set position in array to contain the ship
             ships[row][column] = this;
+            labels.add(vesselIdentifier);
             if (horizontal) {
                 column++;
             } else {
@@ -225,12 +234,12 @@ public abstract class ShipImpl implements Ship {
         // it's a hit. Work out offset & set that position in hit array to true
         try {
             hit[(row - getBowRow() + column - getBowColumn())] = true;
-            vesselIdentifier = vesselThatHasBeenHitIdentifier;
+            labels.set(row - getBowRow() + column - getBowColumn(),
+            vesselThatHasBeenHitIdentifier);
             return true;
         } catch (ArrayIndexOutOfBoundsException exception) {
             return false;
         }
-        
     }
 
     /**
@@ -258,4 +267,20 @@ public abstract class ShipImpl implements Ship {
         return this.getClass().getName();
     }
     
+    /**
+     * @return a single character String to use in Ocean's print method
+     */
+    @Override
+    public String print(int row, int column) {
+        int result = row - getBowRow() + column - getBowColumn();
+        System.out.println( labels.get(result) );
+        /*
+        if(labels[result-1] == null)
+        {
+            output = toString();
+        }else{
+            output = labels[result];
+        }*/
+        return ".";//output;
+    }
 }

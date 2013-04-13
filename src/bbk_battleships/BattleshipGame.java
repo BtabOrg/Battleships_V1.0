@@ -8,7 +8,6 @@
 
 package bbk_battleships;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -16,6 +15,7 @@ import java.util.Set;
 /**
  * @author MARGARET WRIGHT
  * @author KLM
+ * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class BattleshipGame {
 
@@ -39,18 +39,17 @@ public class BattleshipGame {
             limit = oc.getDimension();
             
             do {
-                // read in the shot
+                // read in the shot    
                 Position p = getValidInput(input,limit);
-
+                
                 // accept shots & check whether it's a hit (in Ocean)
                 if (!oc.shootAt(p.getX(), p.getY())) {
                     // a miss
                     System.out.println("A miss, try again.");
-                    
-                    
                 }
                 System.out.println(oc);
-                System.out.println("[. is empty sea; '-' is a miss; 'S' is a hit; 'x' is a sunken ship.]");
+                System.out.println("[. is empty sea; '-' is a miss; 'S' is a"+
+                        " hit; 'X' is a sunken ship.]");
                 System.out.println();
                 
             } while (!oc.isGameOver());
@@ -87,7 +86,8 @@ public class BattleshipGame {
      *
      * @return the valid co-ordinate
      */
-    private static int askForInput(Scanner input, String promptString, int limit) {
+    private static int askForInput(Scanner input, String promptString, 
+            int limit) {
         int coordinate;
         do {
             try {
@@ -99,8 +99,8 @@ public class BattleshipGame {
             } // checks for not an integer
             catch (Exception ex) {
                 System.err
-                        .println("Invalid answer - please enter a number between 0-"
-                                + limit + ".");
+                        .println("Invalid answer - please enter a number"+
+                        " between 0-"+ limit + ".");
                 input.nextLine();
             } // end of catch
         } while (true);

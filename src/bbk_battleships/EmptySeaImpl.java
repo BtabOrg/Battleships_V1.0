@@ -8,6 +8,7 @@ package bbk_battleships;
 
 /**
  * @author KLM
+ * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class EmptySeaImpl extends ShipImpl implements EmptySea {
 

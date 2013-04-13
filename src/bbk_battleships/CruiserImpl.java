@@ -7,7 +7,6 @@
 package bbk_battleships;
 
 /**
- *
  * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class CruiserImpl extends ShipImpl implements Cruiser {

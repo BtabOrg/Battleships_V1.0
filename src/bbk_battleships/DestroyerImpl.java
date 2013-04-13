@@ -7,7 +7,6 @@
 package bbk_battleships;
 
 /**
- *
  * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class DestroyerImpl extends ShipImpl implements Destroyer {
@@ -45,5 +44,21 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
     @Override
     public String toString(){
         return getVesselIdentifier();
+    }
+    
+    /**
+     * If this ship has been hit, marks that part of the ship as "hit"
+     *
+     * @param row User's supplied row shot
+     * @param column User's supplied column shot
+     * @return true if ship is hit, false otherwise
+     */
+    @Override
+    public boolean shootAt(int row, int column) {
+        boolean theVesselWasHit = super.shootAt(row, column);
+        if(theVesselWasHit){
+            setVesselIdentifier( getVesselThatHasBeenHitIdentifier() );
+        }
+        return theVesselWasHit;
     }
 }

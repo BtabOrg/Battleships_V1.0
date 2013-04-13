@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * The position tests ensure that the position object can get and set
+ * two instance variables.
  */
 package bbk_battleships;
 
@@ -8,45 +8,43 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- *
  * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class PositionTest {
-    
-    public PositionTest() {
-    }
 
     @Test
     public void testGetX() {
-        System.out.println("getX");
         Position instance = new Position();
         int expResult = 0;
         int result = instance.getX();
-        assertEquals(expResult, result);
+        assertEquals("The default position x value was not correct",
+                expResult, result);
     }
 
     @Test
     public void testSetX() {
-        System.out.println("setX");
-        int x = 0;
+        int x = 2;
         Position instance = new Position();
         instance.setX(x);
+        assertEquals("The position x value is not correct.",
+                instance.getX(), 2);
     }
 
     @Test
     public void testGetY() {
-        System.out.println("getY");
         Position instance = new Position();
         int expResult = 0;
         int result = instance.getY();
-        assertEquals(expResult, result);
+        assertEquals("The default position y value was not correct",
+                expResult, result);
     }
 
     @Test
     public void testSetY() {
-        System.out.println("setY");
-        int y = 0;
+        int y = 2;
         Position instance = new Position();
         instance.setY(y);
+        assertEquals("The position y value is not correct.",
+                instance.getY(), 2);
     }
 }

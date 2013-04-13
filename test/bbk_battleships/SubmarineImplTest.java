@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * The SubmarineImplTest test cases ensure that the SubmarineImpl facilitates
+ * the features described in the specification of the Battleships game.
  */
 package bbk_battleships;
 
@@ -8,13 +8,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- *
  * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class SubmarineImplTest {
-    
-    public SubmarineImplTest() {
-    }
 
     @Test
     public void testGetShipType() {

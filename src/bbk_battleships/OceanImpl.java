@@ -8,6 +8,7 @@ package bbk_battleships;
 /**
  * @author MARGARET WRIGHT
  * @author KLM
+ * @author Bernard T. A. Baker <bernard@btab.org>
  */
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -120,6 +121,7 @@ public class OceanImpl implements Ocean {
             for (int j = 0; j < board[0].length; j++) {
                 buffer.append(SPACES);
                 buffer.append(board[i][j]);
+                //buffer.append(board[i][j].print(i, j));
             }
             buffer.append("\n");
         }
@@ -157,8 +159,22 @@ public class OceanImpl implements Ocean {
         // check for a ship
         if (isOccupied(row, column)) {  // okay - this is a ship
             // get the ship
-            board[row][column].shootAt(row, column);
+            Ship vessel = board[row][column];
+            vessel.shootAt(row, column);
             setHitCount(getHitCount() + 1);
+            if(vessel.isSunk()){
+                int shipsSunk = getShipsSunk();
+                setShipsSunk(++shipsSunk);
+                vessel.setVesselIdentifier(
+                        vessel.getVesselThatHasBeenSunkIdentifier());
+                System.out.println();
+                System.out.println("You just sank a "+vessel.getShipType());
+                System.out.println();
+            }else{
+                System.out.println();
+                System.out.println("Hit.");
+                System.out.println();
+            }
             return true;
         }else{
             ShipImpl empySea = board[row][column];
