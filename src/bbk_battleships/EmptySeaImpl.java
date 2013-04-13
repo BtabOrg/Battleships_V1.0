@@ -51,6 +51,14 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
     }
     
     /**
+     * @return a single-character String to use in the Ocean's print method.
+     */
+    @Override
+    public String print(int row, int column){
+        return getVesselIdentifier();
+    }
+    
+    /**
      * If this ship has been hit, marks that part of the ship as "hit"
      *
      * @param row    User's supplied row shot

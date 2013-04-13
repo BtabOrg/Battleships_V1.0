@@ -16,7 +16,7 @@ public class SubmarineImpl extends ShipImpl implements Submarine {
 
     public SubmarineImpl() {
         super(ONE);
-        setVesselIdentifier(SUBMARINE);
+        //setVesselIdentifier(SUBMARINE);
     }
     
     /**
@@ -36,13 +36,5 @@ public class SubmarineImpl extends ShipImpl implements Submarine {
     @Override
     public String getShipType() {
         return "submarine";
-    }
-
-    /**
-     * @return a single-character String to use in the Ocean's print method.
-     */
-    @Override
-    public String toString() {
-        return getVesselIdentifier();
     }
 }

@@ -45,10 +45,12 @@ public class BattleshipGame {
                 // accept shots & check whether it's a hit (in Ocean)
                 if (!oc.shootAt(p.getX(), p.getY())) {
                     // a miss
+                    System.out.println("\n\n");
                     System.out.println("A miss, try again.");
+                    System.out.println();
                 }
                 System.out.println(oc);
-                System.out.println("[. is empty sea; '-' is a miss; 'S' is a"+
+                System.out.println("Help and info [. is empty sea; '-' is a miss; 'S' is a"+
                         " hit; 'X' is a sunken ship.]");
                 System.out.println();
                 
@@ -72,7 +74,7 @@ public class BattleshipGame {
     private static Position getValidInput(Scanner input, int limit) {
         // x is the row; y is the column
         int x, y;
-        System.out.println();
+        
         System.out.println("Where do you want to fire (x,y)? ");
         x = askForInput(input, "x/row = ", limit);
         y = askForInput(input, "y/col = ", limit);

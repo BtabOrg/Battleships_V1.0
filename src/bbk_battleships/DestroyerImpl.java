@@ -16,7 +16,7 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
 
     public DestroyerImpl(){
         super(TWO);
-        setVesselIdentifier(DESTROYER);
+        //setVesselIdentifier(DESTROYER);
     }
     
     /**
@@ -38,27 +38,4 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
         return "destroyer";
     }
     
-    /**
-     * @return a single-character String to use in the Ocean's print method.
-     */
-    @Override
-    public String toString(){
-        return getVesselIdentifier();
-    }
-    
-    /**
-     * If this ship has been hit, marks that part of the ship as "hit"
-     *
-     * @param row User's supplied row shot
-     * @param column User's supplied column shot
-     * @return true if ship is hit, false otherwise
-     */
-    @Override
-    public boolean shootAt(int row, int column) {
-        boolean theVesselWasHit = super.shootAt(row, column);
-        if(theVesselWasHit){
-            setVesselIdentifier( getVesselThatHasBeenHitIdentifier() );
-        }
-        return theVesselWasHit;
-    }
 }

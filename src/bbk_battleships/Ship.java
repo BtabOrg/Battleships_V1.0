@@ -27,6 +27,10 @@ public interface Ship {
     
     String getVesselThatHasBeenSunkIdentifier();
     
+    String getVesselThatHasBeenMissedIdentifier();
+    
     String print(int row, int column);
+    
+    void updateLabelsToSunkState();
     
 }

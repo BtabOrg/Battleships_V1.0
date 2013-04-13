@@ -120,8 +120,7 @@ public class OceanImpl implements Ocean {
             buffer.append(i);
             for (int j = 0; j < board[0].length; j++) {
                 buffer.append(SPACES);
-                buffer.append(board[i][j]);
-                //buffer.append(board[i][j].print(i, j));
+                buffer.append(board[i][j].print(i, j));
             }
             buffer.append("\n");
         }
@@ -160,24 +159,34 @@ public class OceanImpl implements Ocean {
         if (isOccupied(row, column)) {  // okay - this is a ship
             // get the ship
             Ship vessel = board[row][column];
-            vessel.shootAt(row, column);
-            setHitCount(getHitCount() + 1);
+            
             if(vessel.isSunk()){
-                int shipsSunk = getShipsSunk();
-                setShipsSunk(++shipsSunk);
-                vessel.setVesselIdentifier(
-                        vessel.getVesselThatHasBeenSunkIdentifier());
-                System.out.println();
-                System.out.println("You just sank a "+vessel.getShipType());
-                System.out.println();
-            }else{
-                System.out.println();
-                System.out.println("Hit.");
-                System.out.println();
+                return false;
+            }else{            
+                vessel.shootAt(row, column);
+                setHitCount(getHitCount() + 1);
+                if(vessel.isSunk()){
+
+                    int shipsSunk = getShipsSunk();
+                    setShipsSunk(++shipsSunk);
+                    
+                    
+                    vessel.updateLabelsToSunkState();
+                            
+                    System.out.println();
+                    System.out.println();
+                    System.out.println("You just sank a "+vessel.getShipType());
+                    System.out.println();
+
+                }else{
+                    System.out.println();
+                    System.out.println("Hit.");
+                    System.out.println();
+                }
+                return true;
             }
-            return true;
         }else{
-            ShipImpl empySea = board[row][column];
+            Ship empySea = board[row][column];
             empySea.setVesselIdentifier(
                     empySea.getVesselThatHasBeenMissedIdentifier());
         }

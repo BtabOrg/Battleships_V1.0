@@ -82,6 +82,11 @@ public abstract class ShipImpl implements Ship {
      * of the ship has been hit.
      */
     protected ArrayList<String> labels;
+    
+    /**
+     * The identifier used to identify a label within an ArrayList.
+     */
+    private int labelIdentifier = 0;
 
     /**
      * clears the hit array indicating whether that part of the "Ship" has been
@@ -93,6 +98,9 @@ public abstract class ShipImpl implements Ship {
         labels = new ArrayList<>(this.getLength());
         for (int i = 0; i < hit.length; i++) {
             hit[i] = false;
+        }
+        for (int i = 0; i < this.length; i++) {
+            labels.add(".");
         }
     }
 
@@ -209,7 +217,7 @@ public abstract class ShipImpl implements Ship {
         for (int i = 0; i < this.getLength(); i++) {
             // set position in array to contain the ship
             ships[row][column] = this;
-            labels.add(vesselIdentifier);
+            labels.set(i,".");
             if (horizontal) {
                 column++;
             } else {
@@ -234,6 +242,7 @@ public abstract class ShipImpl implements Ship {
         // it's a hit. Work out offset & set that position in hit array to true
         try {
             hit[(row - getBowRow() + column - getBowColumn())] = true;
+            labelIdentifier = row - getBowRow() + column - getBowColumn();
             labels.set(row - getBowRow() + column - getBowColumn(),
             vesselThatHasBeenHitIdentifier);
             return true;
@@ -272,15 +281,16 @@ public abstract class ShipImpl implements Ship {
      */
     @Override
     public String print(int row, int column) {
-        int result = row - getBowRow() + column - getBowColumn();
-        System.out.println( labels.get(result) );
-        /*
-        if(labels[result-1] == null)
-        {
-            output = toString();
-        }else{
-            output = labels[result];
-        }*/
-        return ".";//output;
+        return labels.get((row - getBowRow() + column - getBowColumn()));
+    }
+    
+    /**
+     * set all the vessel labels to indicate the vessel has sunk.
+     */    
+    @Override
+    public void updateLabelsToSunkState(){
+        for (int i = 0; i < this.length; i++) {
+            labels.set(i,getVesselThatHasBeenSunkIdentifier());
+        }
     }
 }
