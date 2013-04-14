@@ -15,35 +15,30 @@ import lombok.Setter;
  * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public abstract class ShipImpl implements Ship {
-    
+
     // the number of cells that surround a given location
     private final int LOCATION_PERIMETER = 9;
-    
     /**
-    * the identifier for a vessel.
-    */    
+     * the identifier for a vessel.
+     */
     @Setter
     @Getter
     private String vesselIdentifier = "S";
-    
     /**
-    * the identifier for a vessel that has been hit.
-    */
+     * the identifier for a vessel that has been hit.
+     */
     @Getter
     private String vesselThatHasBeenHitIdentifier = "S";
-    
     /**
-    * the identifier for a vessel that has been missed.
-    */
+     * the identifier for a vessel that has been missed.
+     */
     @Getter
     private String vesselThatHasBeenMissedIdentifier = "-";
-
     /**
-    * the identifier for a vessel that has been missed.
-    */
+     * the identifier for a vessel that has been missed.
+     */
     @Getter
     private String vesselThatHasBeenSunkIdentifier = "X";
-    
     /**
      * the number of squares occupied by the ship. An "empty sea" location has
      * length 1.
@@ -51,38 +46,32 @@ public abstract class ShipImpl implements Ship {
     @Getter
     @Setter(AccessLevel.PROTECTED)
     private int length;
-    
     /**
      * the row (0 to 9) which contains the bow (front) of the ship.
      */
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int bowRow;
-    
     /**
      * the column (0 to 9) which contains the bow (front) of the ship.
      */
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int bowColumn;
-    
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private boolean horizontal;
-    
     /**
      * An array of boolean which indicates whether that part of the ship has
      * been hit. Only battleships use all four locations; cruisers use the first
      * three; destroyers 2; submarines 1; and "empty sea" either one or none..
      */
     protected boolean[] hit;
-
     /**
-     * An array of strings which indicates the label to be used when that part 
+     * An array of strings which indicates the label to be used when that part
      * of the ship has been hit.
      */
     protected ArrayList<String> labels;
-    
     /**
      * The identifier used to identify a label within an ArrayList.
      */
@@ -120,73 +109,71 @@ public abstract class ShipImpl implements Ship {
     public boolean okToPlaceShipAt(int row, int column, boolean horizontal,
             Ocean ocean) {
         boolean itsOk = true;
-        if(row+getLength() > ocean.getDimension() ||
-                column+getLength() > ocean.getDimension()) {
+        if (row + getLength() > ocean.getDimension()
+                || column + getLength() > ocean.getDimension()) {
             itsOk = false;
-        }else{
-            ArrayList<Integer> rowArray = 
+        } else {
+            ArrayList<Integer> rowArray =
                     new ArrayList(LOCATION_PERIMETER);
-            ArrayList<Integer> columnArray = 
+            ArrayList<Integer> columnArray =
                     new ArrayList(LOCATION_PERIMETER);
-            ArrayList<Integer> itemsToBeRemovedArray = 
+            ArrayList<Integer> itemsToBeRemovedArray =
                     new ArrayList(LOCATION_PERIMETER);
 
-            if(horizontal){
-                columnArray.add(column-1);
-                columnArray.add(column-1);
-                columnArray.add(column-1);
-                rowArray.add(row-1);
+            if (horizontal) {
+                columnArray.add(column - 1);
+                columnArray.add(column - 1);
+                columnArray.add(column - 1);
+                rowArray.add(row - 1);
                 rowArray.add(row);
-                rowArray.add(row+1);
-                for(int i=0; i<=getLength(); i++)
-                {
-                    columnArray.add(column+i);
-                    columnArray.add(column+i);
-                    columnArray.add(column+i);
-                    rowArray.add(row-1);
+                rowArray.add(row + 1);
+                for (int i = 0; i <= getLength(); i++) {
+                    columnArray.add(column + i);
+                    columnArray.add(column + i);
+                    columnArray.add(column + i);
+                    rowArray.add(row - 1);
                     rowArray.add(row);
-                    rowArray.add(row+1);
+                    rowArray.add(row + 1);
                 }
-            }else{
-                rowArray.add(row-1);
-                rowArray.add(row-1);
-                rowArray.add(row-1);
-                columnArray.add(column-1);
+            } else {
+                rowArray.add(row - 1);
+                rowArray.add(row - 1);
+                rowArray.add(row - 1);
+                columnArray.add(column - 1);
                 columnArray.add(column);
-                columnArray.add(column+1);
-                for(int i=0; i<=getLength(); i++)
-                {
-                    rowArray.add(row+i);
-                    rowArray.add(row+i);
-                    rowArray.add(row+i);
-                    columnArray.add(column-1);
+                columnArray.add(column + 1);
+                for (int i = 0; i <= getLength(); i++) {
+                    rowArray.add(row + i);
+                    rowArray.add(row + i);
+                    rowArray.add(row + i);
+                    columnArray.add(column - 1);
                     columnArray.add(column);
-                    columnArray.add(column+1);
+                    columnArray.add(column + 1);
                 }
             }
-            
+
             int newLength = rowArray.size();
-            
-            for(int i = 0; i < newLength; i++){
-                if(rowArray.get(i) >= ocean.getDimension() ||
-                        columnArray.get(i) >= ocean.getDimension() ||
-                        rowArray.get(i) < 0 ||
-                        columnArray.get(i) < 0){
+
+            for (int i = 0; i < newLength; i++) {
+                if (rowArray.get(i) >= ocean.getDimension()
+                        || columnArray.get(i) >= ocean.getDimension()
+                        || rowArray.get(i) < 0
+                        || columnArray.get(i) < 0) {
                     itemsToBeRemovedArray.add(i);
                 }
             }
-            
-            for(int i = itemsToBeRemovedArray.size()-1; i >= 0; i--) {
+
+            for (int i = itemsToBeRemovedArray.size() - 1; i >= 0; i--) {
                 int indice = itemsToBeRemovedArray.get(i);
                 rowArray.remove(indice);
                 columnArray.remove(indice);
             }
-            
+
             boolean occupied = false;
-            for(int i = 0; i < rowArray.size(); i++) {
+            for (int i = 0; i < rowArray.size(); i++) {
                 occupied = ocean.isOccupied(rowArray.get(i),
                         columnArray.get(i));
-                if(occupied==true){
+                if (occupied == true) {
                     itsOk = false;
                 }
             }
@@ -213,11 +200,11 @@ public abstract class ShipImpl implements Ship {
         this.setHorizontal(horizontal);
 
         Ship ships[][] = ocean.getShipArray();
-        
+
         for (int i = 0; i < this.getLength(); i++) {
             // set position in array to contain the ship
             ships[row][column] = this;
-            labels.set(i,".");
+            labels.set(i, ".");
             if (horizontal) {
                 column++;
             } else {
@@ -244,7 +231,7 @@ public abstract class ShipImpl implements Ship {
             hit[(row - getBowRow() + column - getBowColumn())] = true;
             labelIdentifier = row - getBowRow() + column - getBowColumn();
             labels.set(row - getBowRow() + column - getBowColumn(),
-            vesselThatHasBeenHitIdentifier);
+                    vesselThatHasBeenHitIdentifier);
             return true;
         } catch (ArrayIndexOutOfBoundsException exception) {
             return false;
@@ -275,7 +262,7 @@ public abstract class ShipImpl implements Ship {
     public String toString() {
         return this.getClass().getName();
     }
-    
+
     /**
      * @return a single character String to use in Ocean's print method
      */
@@ -283,14 +270,14 @@ public abstract class ShipImpl implements Ship {
     public String print(int row, int column) {
         return labels.get((row - getBowRow() + column - getBowColumn()));
     }
-    
+
     /**
      * set all the vessel labels to indicate the vessel has sunk.
-     */    
+     */
     @Override
-    public void updateLabelsToSunkState(){
+    public void updateLabelsToSunkState() {
         for (int i = 0; i < this.length; i++) {
-            labels.set(i,getVesselThatHasBeenSunkIdentifier());
+            labels.set(i, getVesselThatHasBeenSunkIdentifier());
         }
     }
 }

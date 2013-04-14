@@ -159,38 +159,38 @@ public class OceanImpl implements Ocean {
         if (isOccupied(row, column)) {  // okay - this is a ship
             // get the ship
             Ship vessel = board[row][column];
-            
-            if(vessel.isSunk()){
+
+            if (vessel.isSunk()) {
                 return false;
-            }else{            
+            } else {
                 vessel.shootAt(row, column);
                 setHitCount(getHitCount() + 1);
-                if(vessel.isSunk()){
+                if (vessel.isSunk()) {
 
                     int shipsSunk = getShipsSunk();
                     setShipsSunk(++shipsSunk);
-                    
-                    
+
+
                     vessel.updateLabelsToSunkState();
-                            
+
                     System.out.println();
                     System.out.println();
-                    System.out.println("You just sank a "+vessel.getShipType());
+                    System.out.println("You just sank a " + vessel.getShipType());
                     System.out.println();
 
-                }else{
+                } else {
                     System.out.println();
                     System.out.println("Hit.");
                     System.out.println();
                 }
                 return true;
             }
-        }else{
+        } else {
             Ship empySea = board[row][column];
             empySea.setVesselIdentifier(
                     empySea.getVesselThatHasBeenMissedIdentifier());
         }
-        
+
         return false;
     }
 

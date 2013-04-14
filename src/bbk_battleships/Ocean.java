@@ -1,7 +1,7 @@
 package bbk_battleships;
 
 public interface Ocean {
-    
+
     int getDimension();
 
     boolean placeAllShipsRandomly();

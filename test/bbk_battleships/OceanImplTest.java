@@ -20,8 +20,8 @@ public class OceanImplTest {
         int result = instance.getDimension();
         assertEquals("The ocean dimension is not correct.", expResult, result);
     }
-    
-    @Test(timeout=10000)
+
+    @Test(timeout = 10000)
     public void testPlaceAllShipsRandomly() {
         OceanImpl instance = new OceanImpl();
         boolean expResult = true;
@@ -30,7 +30,7 @@ public class OceanImplTest {
         assertEquals("The vessels were not placed randomly.",
                 expResult, result);
     }
-    
+
     @Test
     public void testIsOccupied() {
         OceanImpl instance = new OceanImpl();
@@ -114,8 +114,8 @@ public class OceanImplTest {
                 instance.isOccupied(3, 8));
         assertFalse("The ocean location was occupied, but the ocean is empty.",
                 instance.isOccupied(3, 9));
-        assertFalse("The ocean location was occupied, but the ocean is empty."
-                ,instance.isOccupied(4, 0));
+        assertFalse("The ocean location was occupied, but the ocean is empty.",
+                instance.isOccupied(4, 0));
         assertFalse("The ocean location was occupied, but the ocean is empty.",
                 instance.isOccupied(4, 1));
         assertFalse("The ocean location was occupied, but the ocean is empty.",
@@ -245,28 +245,28 @@ public class OceanImplTest {
         boolean isItOccupied = ocean.isOccupied(deploymentRow,
                 deploymentColumn);
         assertEquals("The location should not be occupied",
-                unoccupiedResult,isItOccupied);
-        
+                unoccupiedResult, isItOccupied);
+
         Submarine submarine = new SubmarineImpl();
         boolean vesselIsHorizontal = true;
         boolean deployed = submarine.okToPlaceShipAt(deploymentRow,
                 deploymentColumn, vesselIsHorizontal, ocean);
-        assertTrue("It should be ok to place the vessel here.",deployed);
-        
+        assertTrue("It should be ok to place the vessel here.", deployed);
+
         submarine.placeShipAt(deploymentRow,
                 deploymentColumn, vesselIsHorizontal, ocean);
-        
+
         boolean expResult = false;
         int targetRow = 1;
         int targetColumn = 0;
         boolean result = ocean.shootAt(targetRow, targetColumn);
-        assertEquals("The projectile should miss.",expResult, result);
-        
+        assertEquals("The projectile should miss.", expResult, result);
+
         int recordedHit = 0;
         int actualHit = ocean.getHitCount();
         assertEquals("The projectile should not have hit the vessel.",
-                recordedHit,actualHit);
-        
+                recordedHit, actualHit);
+
         int shotsThatHaveBeenFired = 1;
         int actuallyShotsThatHaveBeenFired = 1;
         assertEquals("The number of shots fired is not correct.",
@@ -276,38 +276,39 @@ public class OceanImplTest {
 
     @Test
     public void testShootAtAndHitTarget() {
-        
+
         int deploymentRow = 0;
         int deploymentColumn = 0;
-        
+
         OceanImpl ocean = new OceanImpl();
-        
+
         boolean unoccupiedResult = false;
-        boolean isItOccupied = ocean.isOccupied(deploymentRow,deploymentColumn);
+        boolean isItOccupied = ocean.isOccupied(deploymentRow,
+                deploymentColumn);
         assertEquals("The location should not be occupied.",
-                unoccupiedResult,isItOccupied);
-        
+                unoccupiedResult, isItOccupied);
+
         Submarine submarine = new SubmarineImpl();
         boolean vesselIsHorizontal = true;
-        boolean deployed = submarine.okToPlaceShipAt(0,0, true, ocean);
-        assertTrue("It should be ok to place a vessel here.",deployed);
-        
+        boolean deployed = submarine.okToPlaceShipAt(0, 0, true, ocean);
+        assertTrue("It should be ok to place a vessel here.", deployed);
+
         submarine.placeShipAt(deploymentRow,
                 deploymentColumn, vesselIsHorizontal, ocean);
-        
+
         boolean expResult = true;
         int targetRow = 0;
         int targetColumn = 0;
         boolean result = ocean.shootAt(targetRow, targetColumn);
         assertEquals("The projectile should have hit the vessel",
                 expResult, result);
-        
+
         int shotsThatHaveBeenFired = 1;
         int actualShotsThatHaveBeenFired = 1;
         assertEquals("The number of shots fired is not correct.",
                 shotsThatHaveBeenFired,
                 actualShotsThatHaveBeenFired);
-        
+
         int recordedHit = 1;
         int actualHit = ocean.getHitCount();
         assertEquals(
@@ -321,7 +322,7 @@ public class OceanImplTest {
         OceanImpl instance = new OceanImpl();
         boolean expResult = false;
         boolean result = instance.isGameOver();
-        assertEquals("The game should not be over.",expResult, result);
+        assertEquals("The game should not be over.", expResult, result);
     }
 
     @Test
@@ -345,11 +346,11 @@ public class OceanImplTest {
     @Test
     public void testPrintFinalScores() {
         OceanImpl instance = new OceanImpl();
-        String expResult = "GAME OVER!! You scored 0. You sank 0 ships "+
-                "and used 0 shots.";
+        String expResult = "GAME OVER!! You scored 0. You sank 0 ships "
+                + "and used 0 shots.";
         boolean result = Pattern.matches(expResult,
                 instance.printFinalScores());
-        assertTrue("The print final scores should be the same.",result);
+        assertTrue("The print final scores should be the same.", result);
     }
 
     @Test
@@ -379,5 +380,5 @@ public class OceanImplTest {
         int result = instance.getHitCount();
         assertEquals("The number of hits upon the vessel is incorrect.",
                 expResult, result);
-    }   
+    }
 }

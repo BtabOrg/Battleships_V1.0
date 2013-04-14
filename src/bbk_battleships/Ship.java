@@ -1,8 +1,9 @@
 package bbk_battleships;
 
 public interface Ship {
+
     boolean okToPlaceShipAt(int row, int column, boolean horizontal,
-                            Ocean ocean);
+            Ocean ocean);
 
     void placeShipAt(int row, int column, boolean horizontal, Ocean ocean);
 
@@ -22,15 +23,14 @@ public interface Ship {
     boolean isHorizontal();
 
     String getShipType();
-    
+
     void setVesselIdentifier(String param);
-    
+
     String getVesselThatHasBeenSunkIdentifier();
-    
+
     String getVesselThatHasBeenMissedIdentifier();
-    
+
     String print(int row, int column);
-    
+
     void updateLabelsToSunkState();
-    
 }

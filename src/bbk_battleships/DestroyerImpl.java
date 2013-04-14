@@ -10,26 +10,26 @@ package bbk_battleships;
  * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class DestroyerImpl extends ShipImpl implements Destroyer {
-    
+
     private static final int TWO = 2; // The number of squares occupied.
     private static final String DESTROYER = "D"; // the destroyer identifier.
 
-    public DestroyerImpl(){
+    public DestroyerImpl() {
         super(TWO);
         //setVesselIdentifier(DESTROYER);
     }
-    
+
     /**
      * set the length of the vessel.
      */
     @Override
-    public void setLength(int length){
-        if(length != TWO) {
+    public void setLength(int length) {
+        if (length != TWO) {
             super.setLength(TWO);
         }
         super.setLength(length);
     }
-    
+
     /**
      * @return the type of the object - "destroyer".
      */
@@ -37,5 +37,4 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
     public String getShipType() {
         return "destroyer";
     }
-    
 }

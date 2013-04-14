@@ -5,7 +5,6 @@
  */
 
 /* uses Java 7 features */
-
 package bbk_battleships;
 
 import java.util.HashSet;
@@ -29,7 +28,7 @@ public class BattleshipGame {
         int limit;
         String reply;
         Scanner input = new Scanner(System.in);
-        
+
         do {
             // set up the game
             Ocean oc = new OceanImpl();
@@ -37,11 +36,11 @@ public class BattleshipGame {
             System.out.println();
             System.out.println(oc);
             limit = oc.getDimension();
-            
+
             do {
                 // read in the shot    
-                Position p = getValidInput(input,limit);
-                
+                Position p = getValidInput(input, limit);
+
                 // accept shots & check whether it's a hit (in Ocean)
                 if (!oc.shootAt(p.getX(), p.getY())) {
                     // a miss
@@ -50,10 +49,10 @@ public class BattleshipGame {
                     System.out.println();
                 }
                 System.out.println(oc);
-                System.out.println("Help and info [. is empty sea; '-' is a miss; 'S' is a"+
-                        " hit; 'X' is a sunken ship.]");
+                System.out.println("Help and info [. is empty sea; '-' is a "
+                        + "miss; 'S' is a hit; 'X' is a sunken ship.]");
                 System.out.println();
-                
+
             } while (!oc.isGameOver());
             // print out final scores
             System.out.println(oc.printFinalScores());
@@ -74,7 +73,7 @@ public class BattleshipGame {
     private static Position getValidInput(Scanner input, int limit) {
         // x is the row; y is the column
         int x, y;
-        
+
         System.out.println("Where do you want to fire (x,y)? ");
         x = askForInput(input, "x/row = ", limit);
         y = askForInput(input, "y/col = ", limit);
@@ -88,7 +87,7 @@ public class BattleshipGame {
      *
      * @return the valid co-ordinate
      */
-    private static int askForInput(Scanner input, String promptString, 
+    private static int askForInput(Scanner input, String promptString,
             int limit) {
         int coordinate;
         do {
@@ -101,8 +100,8 @@ public class BattleshipGame {
             } // checks for not an integer
             catch (Exception ex) {
                 System.err
-                        .println("Invalid answer - please enter a number"+
-                        " between 0-"+ limit + ".");
+                        .println("Invalid answer - please enter a number"
+                        + " between 0-" + limit + ".");
                 input.nextLine();
             } // end of catch
         } while (true);

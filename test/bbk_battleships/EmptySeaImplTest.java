@@ -17,7 +17,7 @@ public class EmptySeaImplTest {
         EmptySeaImpl instance = new EmptySeaImpl();
         String expResult = "emptysea";
         String result = instance.getShipType();
-        assertEquals("The type of ship is incorrect.",expResult, result);
+        assertEquals("The type of ship is incorrect.", expResult, result);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class EmptySeaImplTest {
         EmptySeaImpl instance = new EmptySeaImpl();
         String expResult = ".";
         String result = instance.toString();
-        assertEquals("The default to string is incorrect.",expResult, result);
+        assertEquals("The default to string is incorrect.", expResult, result);
     }
 
     @Test
@@ -35,9 +35,9 @@ public class EmptySeaImplTest {
         EmptySeaImpl instance = new EmptySeaImpl();
         boolean expResult = false;
         boolean result = instance.shootAt(row, column);
-        assertEquals("There is no vessel located here.",expResult, result);
+        assertEquals("There is no vessel located here.", expResult, result);
         String expIdentifier = instance.getVesselIdentifier();
-        assertEquals("The identifier should change after a shot on an "+
-                "empty location.",expIdentifier, instance.toString());
+        assertEquals("The identifier should change after a shot on an "
+                + "empty location.", expIdentifier, instance.toString());
     }
 }

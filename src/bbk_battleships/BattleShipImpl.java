@@ -14,18 +14,18 @@ public class BattleShipImpl extends ShipImpl implements BattleShip {
 
     private static final int FOUR = 4; // The number of squares occupied.
     private static final String BATTLESHIP = "B"; // the battleship identifier.
-    
+
     public BattleShipImpl() {
         super(FOUR);
         setVesselIdentifier(BATTLESHIP);
     }
-    
+
     /**
      * set the length of the vessel.
      */
     @Override
-    public void setLength(int length){
-        if(length != FOUR) {
+    public void setLength(int length) {
+        if (length != FOUR) {
             super.setLength(FOUR);
         }
         super.setLength(length);

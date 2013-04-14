@@ -22,46 +22,46 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
         super(SIZE);
         setVesselIdentifier(EMPTY_SEA);
     }
-        
+
     /**
      * set the length of the vessel.
      */
     @Override
-    public void setLength(int length){
-        if(length != SIZE) {
+    public void setLength(int length) {
+        if (length != SIZE) {
             super.setLength(SIZE);
         }
         super.setLength(length);
     }
-    
+
     /**
      * @return the type of object - "EmptySea".
      */
     @Override
-    public String getShipType(){
+    public String getShipType() {
         return "emptysea";
     }
-    
+
     /**
      * @return a single-character String to use in the Ocean's print method.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return getVesselIdentifier();
     }
-    
+
     /**
      * @return a single-character String to use in the Ocean's print method.
      */
     @Override
-    public String print(int row, int column){
+    public String print(int row, int column) {
         return getVesselIdentifier();
     }
-    
+
     /**
      * If this ship has been hit, marks that part of the ship as "hit"
      *
-     * @param row    User's supplied row shot
+     * @param row User's supplied row shot
      * @param column User's supplied column shot
      * @return true if ship is hit, false otherwise
      */
@@ -71,5 +71,3 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
         return false; // it's not a hit
     }
 }
-
-

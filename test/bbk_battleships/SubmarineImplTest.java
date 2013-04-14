@@ -350,16 +350,26 @@ public class SubmarineImplTest {
         boolean horizontal = true;
         Ocean ocean = new OceanImpl();
         ShipImpl instance = new SubmarineImpl();
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(0, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(1, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(2, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(3, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(4, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(5, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(6, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(7, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(8, 10, horizontal, ocean));
-        assertFalse("The vessel was placed incorrectly.", instance.okToPlaceShipAt(9, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(0, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(1, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(2, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(3, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(4, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(5, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(6, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(7, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(8, 10, horizontal, ocean));
+        assertFalse("The vessel was placed incorrectly.", 
+                instance.okToPlaceShipAt(9, 10, horizontal, ocean));
     }
 
     @Test
@@ -386,7 +396,8 @@ public class SubmarineImplTest {
         boolean horizontal = true;
         Ocean ocean = new OceanImpl();
         ShipImpl instance = new SubmarineImpl();
-        instance.okToPlaceShipAt(locationRow, locationColumn, horizontal, ocean);
+        instance.okToPlaceShipAt(locationRow, locationColumn, horizontal,
+                ocean);
         instance.placeShipAt(locationRow, locationColumn, horizontal, ocean);
         
         int shotsFiredPriorToShot = ocean.getShotsFired();
@@ -398,10 +409,12 @@ public class SubmarineImplTest {
         assertTrue("The target was missed.", result);
         
         int shotsFiredAfterFiring = ocean.getShotsFired();
-        assertTrue("The shot fired result is not correct.", shotsFiredPriorToShot < shotsFiredAfterFiring );
+        assertTrue("The shot fired result is not correct.", 
+                shotsFiredPriorToShot < shotsFiredAfterFiring );
         
         int hitCountAfterShotBeingFired = ocean.getHitCount();
-        assertTrue("The vessels that have been hit is not correct.", hitCountPriorToShotBeingFired < hitCountAfterShotBeingFired);
+        assertTrue("The vessels that have been hit is not correct.", 
+                hitCountPriorToShotBeingFired < hitCountAfterShotBeingFired);
         
         boolean isTheVesselSunk = instance.isSunk();
         assertTrue("The vessel has not been sunk.", isTheVesselSunk);

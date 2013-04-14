@@ -20,5 +20,4 @@ import org.junit.runners.Suite;
     bbk_battleships.BattleShipImplTest.class
 })
 public class Bbk_battleshipsSuite {
-    
 }
