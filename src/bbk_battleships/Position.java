@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * The position is used to store coordinates provided by the user who performs
+ * input via the keyboard during the execution of the game.
  */
 package bbk_battleships;
 
@@ -13,10 +13,11 @@ class Position {
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int x;
+    
     @Getter
     @Setter(AccessLevel.PACKAGE)
     private int y;
-
+    
     public Position() {
         this.x = 0;
         this.y = 0;

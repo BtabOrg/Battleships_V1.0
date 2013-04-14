@@ -35,6 +35,7 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
     }
 
     /**
+     * Return the type of vessel.
      * @return the type of object - "EmptySea".
      */
     @Override
@@ -43,15 +44,20 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
     }
 
     /**
-     * @return a single-character String to use in the Ocean's print method.
+     * Return the formatted string representation of this object.
+     * @return a String to use in the Ocean's print method.
      */
     @Override
     public String toString() {
         return getVesselIdentifier();
     }
-
+    
     /**
-     * @return a single-character String to use in the Ocean's print method.
+     * The print operation returns a single-character String to use in the 
+     * Ocean's print method.
+     * @param row
+     * @param column
+     * @return a single character representing a part of the vessel.
      */
     @Override
     public String print(int row, int column) {
@@ -59,15 +65,19 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
     }
 
     /**
-     * If this ship has been hit, marks that part of the ship as "hit"
-     *
-     * @param row User's supplied row shot
-     * @param column User's supplied column shot
-     * @return true if ship is hit, false otherwise
+     * The sea is not a sea bound vessel and returns false when shot at.
+     * Update the identifier of this instance in preparation for it being
+     * displayed in the GUI.
+     * 
+     * @param row User's supplied row shot.
+     * @param column User's supplied column shot.
+     * @return false
      */
     @Override
     public boolean shootAt(int row, int column) {
+        // Tpdate the identifier used in the GUI.
         setVesselIdentifier(getVesselThatHasBeenMissedIdentifier());
-        return false; // it's not a hit
+        // The ocean is not a sea bound vessel.
+        return false;
     }
 }

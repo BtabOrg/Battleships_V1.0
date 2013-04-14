@@ -1,5 +1,12 @@
+/**
+ * The Battleship defines specific operations for retrieving the type of ship
+ * and returning the string representation of the class.
+ */
 package bbk_battleships;
 
+/**
+ * @author Bernard T. A. Baker <bernard@btab.org>
+ */
 public interface BattleShip extends Ship {
 
     /**
