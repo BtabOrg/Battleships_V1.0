@@ -16,7 +16,7 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
 
     public DestroyerImpl() {
         super(TWO);
-        //setVesselIdentifier(DESTROYER);
+        setVesselIdentifier(DESTROYER);
     }
 
     /**
@@ -36,5 +36,14 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
     @Override
     public String getShipType() {
         return "destroyer";
+    }
+    
+    /**
+     * Return the formatted string representation of this object.
+     * @return a String to use in the Ocean's print method.
+     */
+    @Override
+    public String toString() {
+        return getVesselIdentifier();
     }
 }

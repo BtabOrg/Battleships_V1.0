@@ -8,6 +8,7 @@ package bbk_battleships;
 
 /**
  * @author KLM
+ * @author Bernard T. A. Baker <bernard@btab.org>
  */
 public class SubmarineImpl extends ShipImpl implements Submarine {
 
@@ -16,7 +17,7 @@ public class SubmarineImpl extends ShipImpl implements Submarine {
 
     public SubmarineImpl() {
         super(ONE);
-        //setVesselIdentifier(SUBMARINE);
+        setVesselIdentifier(SUBMARINE);
     }
 
     /**
@@ -36,5 +37,14 @@ public class SubmarineImpl extends ShipImpl implements Submarine {
     @Override
     public String getShipType() {
         return "submarine";
+    }
+    
+    /**
+     * Return the formatted string representation of this object.
+     * @return a String to use in the Ocean's print method.
+     */
+    @Override
+    public String toString() {
+        return getVesselIdentifier();
     }
 }

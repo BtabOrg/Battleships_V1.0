@@ -16,6 +16,7 @@ public class CruiserImpl extends ShipImpl implements Cruiser {
 
     public CruiserImpl() {
         super(THREE);
+        setVesselIdentifier(CRUISER);
     }
 
     /**
@@ -35,5 +36,14 @@ public class CruiserImpl extends ShipImpl implements Cruiser {
     @Override
     public String getShipType() {
         return "cruiser";
+    }
+    
+    /**
+     * Return the formatted string representation of this object.
+     * @return a String to use in the Ocean's print method.
+     */
+    @Override
+    public String toString() {
+        return getVesselIdentifier();
     }
 }
