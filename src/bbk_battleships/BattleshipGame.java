@@ -1,10 +1,11 @@
 /*
- * A Battleship Game class
- * sets up the game; accepts "shots" from the user; displays the results;
- * prints final scores; and asks the user if he/she wants to play again.
+ * A Battleship Game class.
+ * Sets up the game; accepts "shots" from the user, displays the results,
+ * prints final scores, and asks the user if he/she wants to play again.
+ * 
+ * Uses Java 7 features.
  */
 
-/* uses Java 7 features */
 package bbk_battleships;
 
 import java.util.HashSet;
@@ -18,11 +19,29 @@ import java.util.Set;
  */
 public class BattleshipGame {
 
+    /**
+     * The BattleshipGame main method. In this class the game is set up; 
+     * the game accepts shots from the user; the game displays the results; 
+     * the game prints the final scores; and asks the user if s/he wants to 
+     * play again. All input/output is done here (although some of it is 
+     * done by calling a print() method in the Ocean class.) All computation 
+     * will be done in the Ocean class and the various Ship classes. To aid 
+     * the user, row numbers should be displayed along the left edge of the 
+     * array, and column numbers should be displayed along the top. Numbers 
+     * should be 0 to 9, not 1to10. The top left corner square should be 
+     * location 0,0. Use different characters to indicate locations that 
+     * contain a hit, locations that contain a miss, and locations that have 
+     * never been red upon (see later).
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
 
-        Set<String> replies = new HashSet<>();   // TODO - improve this
+        Set<String> replies = new HashSet<>();
+        replies.add("YES");
         replies.add("Yes");
         replies.add("yes");
+        replies.add("Y");
         replies.add("y");
 
         int limit;
@@ -38,23 +57,25 @@ public class BattleshipGame {
             limit = oc.getDimension();
 
             do {
-                // read in the shot    
+                // read in the shot.
                 Position p = getValidInput(input, limit);
 
-                // accept shots & check whether it's a hit (in Ocean)
+                // accept shots & check whether it's a hit (in Ocean).
                 if (!oc.shootAt(p.getX(), p.getY())) {
                     // a miss
                     System.out.println("\n\n");
                     System.out.println("A miss, try again.");
                     System.out.println();
                 }
+                // print the ocean.
                 System.out.println(oc);
+                // display the instructions and help information.
                 System.out.println("Help and info [. is empty sea; '-' is a "
                         + "miss; 'S' is a hit; 'X' is a sunken ship.]");
                 System.out.println();
 
             } while (!oc.isGameOver());
-            // print out final scores
+            // print out final scores.
             System.out.println(oc.printFinalScores());
 
             System.out.print("Do you want to play again (Yes or No)? ");
@@ -64,7 +85,7 @@ public class BattleshipGame {
 
 
     /*
-     * Gets valid input from user for row (x) & column (y)
+     * Gets valid input from user for row (x) & column (y).
      *
      * @param user input from keyboard
      *
@@ -81,10 +102,10 @@ public class BattleshipGame {
     }
 
     /*
-     * Checks for valid user input for x or y
-     *
+     * Checks for valid user input for x or y.
+     * 
      * @param input from user
-     *
+     * 
      * @return the valid co-ordinate
      */
     private static int askForInput(Scanner input, String promptString,
