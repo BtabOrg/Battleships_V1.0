@@ -24,17 +24,6 @@ public class EmptySeaImpl extends ShipImpl implements EmptySea {
     }
 
     /**
-     * set the length of the vessel.
-     */
-    @Override
-    public void setLength(int length) {
-        if (length != SIZE) {
-            super.setLength(SIZE);
-        }
-        super.setLength(length);
-    }
-
-    /**
      * Return the type of vessel.
      * @return the type of object - "EmptySea".
      */

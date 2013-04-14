@@ -21,17 +21,7 @@ public class SubmarineImpl extends ShipImpl implements Submarine {
     }
 
     /**
-     * set the length of the vessel.
-     */
-    @Override
-    public void setLength(int length) {
-        if (length != ONE) {
-            super.setLength(ONE);
-        }
-        super.setLength(length);
-    }
-
-    /**
+     * Return the type of vessel.
      * @return the type of the object - "submarine".
      */
     @Override

@@ -351,16 +351,6 @@ public class BattleShipImplTest {
     }
 
     @Test
-    public void testSetLength() {
-        int length = 4;
-        ShipImpl instance = new BattleShipImpl();
-        instance.setLength(length);
-        int expResult = 4;
-        int result = instance.getLength();
-        assertEquals("The length is not correct.", expResult, result);
-    }
-
-    @Test
     public void testGetBowRow() {
         ShipImpl instance = new BattleShipImpl();
         int expResult = 0;

@@ -486,16 +486,6 @@ public class SubmarineImplTest {
     }
 
     @Test
-    public void testSetLength() {
-        int length = 1;
-        ShipImpl instance = new SubmarineImpl();
-        instance.setLength(length);
-        int expResult = 1;
-        int result = instance.getLength();
-        assertEquals("The length is not correct.", expResult, result);
-    }
-
-    @Test
     public void testGetBowRow() {
         ShipImpl instance = new SubmarineImpl();
         int expResult = 0;

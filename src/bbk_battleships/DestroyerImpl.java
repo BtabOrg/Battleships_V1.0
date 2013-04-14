@@ -20,17 +20,7 @@ public class DestroyerImpl extends ShipImpl implements Destroyer {
     }
 
     /**
-     * set the length of the vessel.
-     */
-    @Override
-    public void setLength(int length) {
-        if (length != TWO) {
-            super.setLength(TWO);
-        }
-        super.setLength(length);
-    }
-
-    /**
+     * Return the type of vessel.
      * @return the type of the object - "destroyer".
      */
     @Override

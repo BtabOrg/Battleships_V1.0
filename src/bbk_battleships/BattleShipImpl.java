@@ -24,18 +24,6 @@ public class BattleShipImpl extends ShipImpl implements BattleShip {
     }
 
     /**
-     * Set the length of the vessel.
-     * 
-     */
-    @Override
-    public void setLength(int length) {
-        if (length != FOUR) {
-            super.setLength(FOUR);
-        }
-        super.setLength(length);
-    }
-
-    /**
      * Return the type of vessel.
      * @return the type of the object - "battleship".
      */

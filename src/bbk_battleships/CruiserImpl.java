@@ -20,17 +20,7 @@ public class CruiserImpl extends ShipImpl implements Cruiser {
     }
 
     /**
-     * set the length of the vessel.
-     */
-    @Override
-    public void setLength(int length) {
-        if (length != THREE) {
-            super.setLength(THREE);
-        }
-        super.setLength(length);
-    }
-
-    /**
+     * Return the type of vessel.
      * @return the type of the object - "cruiser".
      */
     @Override

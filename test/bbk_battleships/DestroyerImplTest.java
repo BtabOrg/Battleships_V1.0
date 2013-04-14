@@ -434,16 +434,6 @@ public class DestroyerImplTest {
     }
 
     @Test
-    public void testSetLength() {
-        int length = 3;
-        ShipImpl instance = new DestroyerImpl();
-        instance.setLength(length);
-        int expResult = 3;
-        int result = instance.getLength();
-        assertEquals("The length is not correct.", expResult, result);
-    }
-
-    @Test
     public void testGetBowRow() {
         ShipImpl instance = new DestroyerImpl();
         int expResult = 0;

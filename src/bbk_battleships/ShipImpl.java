@@ -1,6 +1,7 @@
 /*
  * Class Ship describes characteristics common to all the ships.
- *
+ * A vessel has different states which are used for the display operations of
+ * the GUI.
  */
 package bbk_battleships;
 
@@ -39,12 +40,12 @@ public abstract class ShipImpl implements Ship {
      */
     @Getter
     private String vesselThatHasBeenSunkIdentifier = "X";
+    
     /**
      * the number of squares occupied by the ship. An "empty sea" location has
      * length 1.
      */
     @Getter
-    @Setter(AccessLevel.PROTECTED)
     private int length;
     /**
      * the row (0 to 9) which contains the bow (front) of the ship.
@@ -72,10 +73,6 @@ public abstract class ShipImpl implements Ship {
      * of the ship has been hit.
      */
     protected ArrayList<String> labels;
-    /**
-     * The identifier used to identify a label within an ArrayList.
-     */
-    private int labelIdentifier = 0;
 
     /**
      * clears the hit array indicating whether that part of the "Ship" has been
@@ -214,7 +211,9 @@ public abstract class ShipImpl implements Ship {
     }
 
     /**
-     * If this ship has been hit, marks that part of the ship as "hit"
+     * If this ship has been hit, marks that part of the ship as "hit".
+     * Update the label which will be used by the games GUI display operations
+     * in the ocean implementation.
      *
      * @param row User's supplied row shot
      * @param column User's supplied column shot
@@ -229,7 +228,6 @@ public abstract class ShipImpl implements Ship {
         // it's a hit. Work out offset & set that position in hit array to true
         try {
             hit[(row - getBowRow() + column - getBowColumn())] = true;
-            labelIdentifier = row - getBowRow() + column - getBowColumn();
             labels.set(row - getBowRow() + column - getBowColumn(),
                     vesselThatHasBeenHitIdentifier);
             return true;
@@ -239,24 +237,22 @@ public abstract class ShipImpl implements Ship {
     }
 
     /**
-     * checks whether this ship is sunk - using the hit array
-     *
+     * Checks whether this ship is sunk - using the hit array.
      * @return true if every part of the ship has been hit, false otherwise.
      */
     @Override
     public boolean isSunk() {
-
         for (boolean b : hit) {
             if (!b) {
                 return false;
             }
         }
-
         return true;
     }
 
     /**
-     * @return a single character String to use in Ocean's print method
+     * Return the formatted string representation of this object.
+     * @return a String to use in the Ocean's print method.
      */
     @Override
     public String toString() {
