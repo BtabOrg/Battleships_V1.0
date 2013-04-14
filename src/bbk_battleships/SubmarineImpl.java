@@ -1,7 +1,15 @@
-/*
- * Submarine class
- * Four submarines
- * Length 1
+/**
+ * Class SubmarineImpl describes characteristics common to all submarines
+ * vessels.
+ * 
+ * This abstraction is a different type of vessel. It has a different name and
+ * a different length.
+ * 
+ * The constructor sets the length of the vessel and provides a 
+ * single-character used as an identifier.
+ * 
+ * There are four submarines in the game.
+ * The length of the submarine is 1.
  * 
  */
 package bbk_battleships;
@@ -12,9 +20,19 @@ package bbk_battleships;
  */
 public class SubmarineImpl extends ShipImpl implements Submarine {
 
-    private static final int ONE = 1; // number of squares occupied.
-    private static final String SUBMARINE = "S"; // the vessel identifier.
+    /**
+     * Number of squares occupied.
+     */
+    private static final int ONE = 1;
+    
+    /**
+     * The vessel identifier.
+     */
+    private static final String SUBMARINE = "S";
 
+    /**
+     * Sets the length of the vessel and stores the identifier for the vessel.
+     */
     public SubmarineImpl() {
         super(ONE);
         setVesselIdentifier(SUBMARINE);

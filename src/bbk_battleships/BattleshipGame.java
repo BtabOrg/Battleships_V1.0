@@ -1,4 +1,4 @@
-/*
+/**
  * A Battleship Game class.
  * Sets up the game; accepts "shots" from the user, displays the results,
  * prints final scores, and asks the user if he/she wants to play again.

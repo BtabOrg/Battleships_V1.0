@@ -1,10 +1,12 @@
-/*
+/**
  * Class Ship describes characteristics common to all the ships.
  * 
  * All sea bound vessels have different states which are used by the display 
  * operations of the GUI.
  * 
- * 
+ * The constructor sets the default lists for indicating which part of the
+ * vessel has been hit and the labels used by the GUI to indicate which 
+ * part of the vessel has been hit, missed or sunk.
  */
 package bbk_battleships;
 

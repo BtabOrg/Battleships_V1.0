@@ -1,7 +1,12 @@
-/*
- * A Battleship class which extends ship.
- * One battleship in the game.
- * Length 4
+/**
+ * Class BattleShipImpl describes characteristics common to all battleship
+ * vessels.
+ * 
+ * This abstraction is a different type of vessel. It has a different name and
+ * a different length.
+ * 
+ * There is one battleship in the game.
+ * The length of the battleship is 4.
  * 
  */
 package bbk_battleships;
@@ -12,11 +17,18 @@ package bbk_battleships;
  */
 public class BattleShipImpl extends ShipImpl implements BattleShip {
 
-    private static final int FOUR = 4; // The number of squares occupied.
-    private static final String BATTLESHIP = "B"; // the battleship identifier.
+    /**
+     * Number of squares occupied.
+     */
+    private static final int FOUR = 4;
+    
+    /**
+     * The vessel identifier.
+     */
+    private static final String BATTLESHIP = "B";
 
     /**
-     * Vessel constructor.
+     * Sets the length of the vessel and stores the identifier for the vessel.
      */
     public BattleShipImpl() {
         super(FOUR);

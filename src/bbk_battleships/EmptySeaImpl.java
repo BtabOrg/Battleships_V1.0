@@ -1,8 +1,16 @@
-/*
- * Class Empty Sea
- * describes part of the ocean that doesn't have a ship in it.
- * Length of 1
- *
+/**
+ * Class EmptySeaImpl describes characteristics common to aall empty sea 
+ * instances.
+ * 
+ * This abstraction is not a vessel. It has a different name and a different
+ * length.
+ * 
+ * The constructor sets the length and provides a single-character used 
+ * as an identifier.
+ * 
+ * All locations not occupied by a sea bound vessel is an empty sea instance.
+ * The length of the empty-sea is 1.
+ * 
  */
 package bbk_battleships;
 
@@ -12,11 +20,18 @@ package bbk_battleships;
  */
 public class EmptySeaImpl extends ShipImpl implements EmptySea {
 
-    private final static int SIZE = 1; // number of squares occupied.
-    private static final String EMPTY_SEA = "."; // the empty sea identifier.
+    /**
+     * Number of squares occupied.
+     */
+    private final static int SIZE = 1;
+    
+    /**
+     * The vessel identifier.
+     */
+    private static final String EMPTY_SEA = ".";
 
     /**
-     * sets the length & clears the hit array
+     * Sets the length of the vessel and stores the identifier for the vessel.
      */
     public EmptySeaImpl() {
         super(SIZE);

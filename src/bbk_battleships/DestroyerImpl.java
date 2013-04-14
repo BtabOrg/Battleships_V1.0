@@ -1,7 +1,15 @@
-/*
- * Destroyer class
- * Three destroyers
- * Length 2
+/**
+ * Class DestroyerImpl describes characteristics common to all destroyer 
+ * vessels.
+ * 
+ * This abstraction is a different type of vessel. It has a different name and
+ * a different length.
+ * 
+ * The constructor sets the length of the vessel and provides a 
+ * single-character used as an identifier.
+ * 
+ * There are three destroyers in the game.
+ * The length of the destroyer is 2.
  * 
  */
 package bbk_battleships;
@@ -11,9 +19,19 @@ package bbk_battleships;
  */
 public class DestroyerImpl extends ShipImpl implements Destroyer {
 
-    private static final int TWO = 2; // The number of squares occupied.
-    private static final String DESTROYER = "D"; // the destroyer identifier.
+    /**
+     * Number of squares occupied.
+     */
+    private static final int TWO = 2;
+    
+    /**
+     * The vessel identifier.
+     */
+    private static final String DESTROYER = "D";
 
+    /**
+     * Sets the length of the vessel and stores the identifier for the vessel.
+     */
     public DestroyerImpl() {
         super(TWO);
         setVesselIdentifier(DESTROYER);

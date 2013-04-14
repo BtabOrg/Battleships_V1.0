@@ -1,4 +1,4 @@
-/*
+/**
  * Class Ocean contains array of Ships, representing the "ocean"
  * Ocean keeps track of shots fired, hit count and number of ships sunk.
  * Ocean provides checks for whether a shot hits a ship, sinks it or misses.
@@ -18,22 +18,41 @@ import java.util.Random;
 
 public class OceanImpl implements Ocean {
 
-    private static final int UPPER;  // upper bound of the (square) board
+    /**
+     * The upper bound of the (square) board.
+     */
+    private static final int UPPER;
+    
     /**
      * Used to quickly determine which ship is in any given location.
      */
     private final ShipImpl[][] board;
+    
+    /**
+     * The total number of shots fired by the user.
+     */
     @Getter
     @Setter
-    private int shotsFired; // The total number of shots fired by the user.
+    private int shotsFired;
+    
+    /**
+     * The number of times a shot hit a ship.
+     */
     @Getter
     @Setter(AccessLevel.PRIVATE)
-    private int hitCount; // The number of times a shot hit a ship.
+    private int hitCount;
+    
+    /**
+     * The number of ships sunk 10 ships in all.
+     */
     @Getter
     @Setter(AccessLevel.PRIVATE)
-    private int shipsSunk; // The number of ships sunk 10 ships in all.
+    private int shipsSunk;
 
-    static {  // just to show how to use static initialization blocks
+    /**
+     * Initialise UPPER.
+     */
+    static {  // 
         UPPER = 10;
     }
 
@@ -42,18 +61,21 @@ public class OceanImpl implements Ocean {
      * initialises game variables, shotsFired, hitCount & shipsSunk
      */
     public OceanImpl() {
+        // create a new board and set the length of the lists.
         board = new ShipImpl[UPPER][UPPER];
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = new EmptySeaImpl();
             }
         }
+        // set the default game variables.
         setShotsFired(0);
         setHitCount(0);
         setShipsSunk(0);
     }
 
     /**
+     * Get the length of the board.
      * @return the size of the row/column
      */
     @Override
@@ -62,13 +84,18 @@ public class OceanImpl implements Ocean {
     }
 
     /**
-     * Places all 10 board randomly on the (initially empty) ocean.
+     * Place the fleet on the empty board.
+     * The fleet must consist of one battleship, two cruisers, three destroyers,
+     * and four submarines. The vessels must be placed starting with the largest
+     * and ending with the smallest. This is because the board may run out of 
+     * feasible locations to place the vessels if it performed in a random
+     * manner.
+     * @return a boolean true if all fleet members were placed on the board.
      */
     @Override
     public boolean placeAllShipsRandomly() {
-        // TODO
-        // this does not have a "random" fleet - you should have one
-
+        
+        // define the sea bound fleet of vessels.
         Ship[] fleet = new Ship[UPPER];
         fleet[0] = new BattleShipImpl();
         fleet[1] = new CruiserImpl();
@@ -102,7 +129,8 @@ public class OceanImpl implements Ocean {
     }
 
     /**
-     * Prints the ocean.
+     * Return the formatted string representation of this instance.
+     * @return a String to use in the GUI.
      */
     @Override
     public String toString() { // this replaces the "print" method of the spec
@@ -120,6 +148,8 @@ public class OceanImpl implements Ocean {
             buffer.append(i);
             for (int j = 0; j < board[0].length; j++) {
                 buffer.append(SPACES);
+                // call the print operation of the instance located at
+                // the given multidimensional array indices.
                 buffer.append(board[i][j].print(i, j));
             }
             buffer.append("\n");
@@ -129,7 +159,6 @@ public class OceanImpl implements Ocean {
 
     /**
      * Checks whether the location contains anything other than empty sea.
-     *
      * @param row the x position on the board
      * @param column the y position on the board
      * @return true if the given location contains a ship, false if it does not.
@@ -143,7 +172,6 @@ public class OceanImpl implements Ocean {
      * Checks whether the location contains a ship, still afloat. Marks that
      * ship as hit and checks whether whole ship is sunk. Updates the number of
      * shots that have been fired, and number of hits.
-     *
      * @param row the x position
      * @param column the y position
      * @return true if location contains a "real" ship, still afloat, false if
@@ -152,14 +180,16 @@ public class OceanImpl implements Ocean {
     @Override
     public boolean shootAt(int row, int column) {
         // increment the number of shots fired regardless of result
-        // use of accessor so that internal representation can change without effecting usage
+        // use of accessor so that internal representation can change without 
+        // effecting usage.
         setShotsFired(getShotsFired() + 1);
 
         // check for a ship
         if (isOccupied(row, column)) {  // okay - this is a ship
             // get the ship
             Ship vessel = board[row][column];
-
+            
+            // the vessel is already sunk
             if (vessel.isSunk()) {
                 return false;
             } else {
@@ -169,7 +199,6 @@ public class OceanImpl implements Ocean {
 
                     int shipsSunk = getShipsSunk();
                     setShipsSunk(++shipsSunk);
-
 
                     vessel.updateLabelsToSunkState();
 
@@ -190,14 +219,12 @@ public class OceanImpl implements Ocean {
             empySea.setVesselIdentifier(
                     empySea.getVesselThatHasBeenMissedIdentifier());
         }
-
         return false;
     }
 
     /**
      * Returns true if all the ships on the board have been sunk, otherwise
      * false.
-     *
      * @return the "fleet" has been sunk
      */
     @Override
@@ -207,6 +234,7 @@ public class OceanImpl implements Ocean {
     }
 
     /**
+     * Return the total number of vessels that have been sunk.
      * @return the number of ships sunk (in this game).
      */
     @Override
@@ -218,7 +246,6 @@ public class OceanImpl implements Ocean {
      * Gets the board so that the Ocean parameter can look at the contents of
      * this array; the placeShipAt method can modify it this board (not a good
      * idea).
-     *
      * @return the array of board
      */
     @Override
@@ -227,8 +254,9 @@ public class OceanImpl implements Ocean {
     }
 
     /**
-     * A string containing the final results for hits, ships sunk and shots
-     * fired
+     * Returns a string containing the final results for hits, ships sunk 
+     * and shots fired.
+     * @return a string with information about the game.
      */
     @Override
     public String printFinalScores() {

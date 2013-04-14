@@ -4,6 +4,9 @@
  */
 package bbk_battleships;
 
+/**
+ * @author Bernard T. A. Baker <bernard@btab.org>
+ */
 public interface EmptySea extends Ship {
 
     /**
